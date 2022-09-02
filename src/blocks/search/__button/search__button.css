@@ -1,0 +1,8 @@
+.search__button{
+  margin-left: -87px;
+  width: 80px;
+  height: 34px;
+  background-image: url("../../../images/findButton.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}

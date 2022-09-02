@@ -1,0 +1,6 @@
+.period {
+  margin-top: 110px;
+  display: grid;
+  grid-template-columns: 228px 1fr;
+  text-align: center;
+}

@@ -1,0 +1,7 @@
+.footer__link-container{
+  margin-right: 20px;
+}
+
+.footer__link-container:last-of-type{
+  margin-right: 0;
+}

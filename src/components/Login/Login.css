@@ -1,0 +1,126 @@
+.sign {
+  width: 396px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+.sign__header {
+  width: 396px;
+  padding-top: 70px;
+  padding-bottom: 40px;
+}
+.sign__logo {
+  width: 38px;
+  height: 38px;
+}
+.sign__title {
+  margin: 40px 0 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+.sign__form {
+  display: flex;
+  flex-direction: column;
+  width: 396px;
+}
+.sign__label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #A0A0A0;
+}
+.sign__label:last-of-type {
+  margin-bottom: 0;
+
+}
+.sign__input {
+  border: 0;
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #F9F9F9;
+  border-radius: 8px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}
+.sign__err {
+  color: #FF3055;
+  margin-top: 10px;
+}
+.sign__submit {
+  margin-top: 70px;
+  height: 45px;
+  border: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  background-color: #3456F3;
+  border-radius: 3px;
+}
+.sign__link-wrapper {
+  margin-top: 16px;
+  margin-bottom: 232px;
+  align-self: center;
+}
+.sign__link {
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #3456F3;
+}
+.sign__question {
+  margin-right: 6px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #A0A0A0;
+}
+
+@media screen and (max-width: 800px) {
+
+}
+
+@media screen and (max-width: 400px)  {
+  .sign {
+    width: 260px;
+  }
+  .sign__header {
+    width: 260px;
+    text-align: center;
+    padding-top: 56px;
+    padding-bottom: 80px;
+  }
+  .sign__title {
+    margin-top: 50px;
+  }
+
+  .sign__submit {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .sign__question {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .sign__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .sign__link-wrapper {
+    margin-top: 14px;
+    margin-bottom: 30px;
+  }
+}

@@ -1,0 +1,9 @@
+.techs__icon-text {
+  margin: auto;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: center;
+  letter-spacing: -0.04em;
+}

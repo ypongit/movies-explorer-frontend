@@ -1,0 +1,7 @@
+.promo__link-container{
+  margin: 0 auto 0;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}

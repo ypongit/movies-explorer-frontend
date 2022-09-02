@@ -1,0 +1,8 @@
+.navigation__links {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style-type: none;
+}

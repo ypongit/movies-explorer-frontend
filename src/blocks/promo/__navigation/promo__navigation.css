@@ -1,0 +1,7 @@
+.promo__navigation{
+  min-height: 66px;
+  display: flex;
+  align-items: center;
+  background-color: #000;
+  margin-top: 224px;
+}

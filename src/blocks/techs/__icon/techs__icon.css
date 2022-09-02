@@ -1,0 +1,9 @@
+.techs__icon {
+  display: flex;
+  align-items: center;
+  width: 90px;
+  height: 60px;
+  background-color: #E8E8E8;
+  border-radius: 10px;
+  margin: 0 5px 0;
+}

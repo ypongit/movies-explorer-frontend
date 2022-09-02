@@ -1,0 +1,48 @@
+.movie__image {
+  width: 270px;
+  height: 151px;
+}
+.movie__heading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 29px;
+  padding-top: 14px;
+  border-bottom: 1px solid #E8E8E8;
+  box-sizing: border-box;
+}
+.movie__heading-title{
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+}
+.movie__like-button{
+  padding: 0;
+  background-color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+}
+.movie__duration{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #A0A0A0;
+}
+
+@media screen and (max-width: 800px) {
+  .movie__image {
+    width: 339px;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .movie__image {
+    width: 300px;
+    height: 168px;
+  }
+}

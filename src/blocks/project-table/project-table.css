@@ -1,0 +1,8 @@
+.project-table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 70px 0 0;
+  padding: 0;
+
+}

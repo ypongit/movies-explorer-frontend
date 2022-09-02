@@ -1,0 +1,145 @@
+.menu-burger {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  /* visibility: hidden; */
+  /* grid-template-columns: (33%, 1fr); */
+}
+.menu-burger__left {
+  background-color: black;
+  width: 33%;
+  /* height: 100%; */
+  color: white;
+  opacity: 0.5;
+  visibility: hidden;
+}
+.menu-burger__right {
+  background-color: white;
+  width: 67%;
+  visibility: hidden;
+}
+
+/* скрываем чекбокс */
+#menu__toggle {
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+/* стилизуем кнопку */
+.menu__btn {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  visibility: hidden;
+  top: 15px;
+  /*left: 20px; */
+  right: 30px;
+  width: 28px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* добавляем "гамбургер" */
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #616161;
+}
+.menu__btn > span::before {
+  content: '';
+  top: -7px;
+}
+.menu__btn > span::after {
+  content: '';
+  top: 7px;
+}
+/* контейнер меню */
+.menu-burger__nav {
+  padding: 0;
+  margin-top: 160px;
+  list-style: none;
+  text-align: center;
+}
+.menu-burger__item {
+  padding-top: 28px;
+}
+.menu-burger__item:nth-child(1) {
+  padding-top: 0;
+}
+.menu-burger__item:last-child {
+  padding-top: 500px;
+  align-items: center;
+}
+.menu-burger__link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+.menu-burger__link:hover {
+  text-decoration: underline;
+}
+.menu-burger__profile-btn {
+  height: 32px;
+  width: 100px;
+  background-color: #F5F5F5;
+  color: #000;
+  border: 0;
+  border-radius: 20px;
+}
+@media screen and (max-width: 800px) {
+  #menu__toggle:checked ~ .menu__btn > span {
+    transform: rotate(45deg);
+  }
+  #menu__toggle:checked ~ .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0);
+  }
+  #menu__toggle:checked ~ .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+  #menu__toggle:checked ~ .menu-burger__right {
+    visibility: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+  }
+  #menu__toggle:checked ~ .menu-burger__left {
+    visibility: visible;
+    display: flex;
+    z-index: 1;
+  }
+
+  .menu__btn {
+    visibility: visible;
+    z-index: 2;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #menu__toggle:checked ~ .menu-burger__left {
+    visibility: hidden;
+    width: 0%;
+  }
+  .menu-burger__right {
+    width: 100%;
+  }
+  .menu-burger__nav {
+    margin-top: 144px;
+  }
+  .menu-burger__item {
+    padding-top: 24px;
+  }
+  .menu-burger__item:last-child {
+    padding-top: 444px;
+  }
+}

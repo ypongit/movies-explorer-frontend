@@ -1,0 +1,13 @@
+.period__heading {
+  margin: 0;
+  padding: 9px;
+  background-color: #F2F2F2;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.period__heading:first-child {
+  background-color: #2BE080;
+}

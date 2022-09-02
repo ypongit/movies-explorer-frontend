@@ -1,0 +1,83 @@
+@import url('./vendor/normalize.css');
+@import url('./vendor/fonts/fonts.css');
+@import url('./blocks/page/page.css');
+@import url('./blocks/content/content.css');
+@import url('./blocks/link/link.css');
+/* @import url('./blocks/header/header.css');
+@import url('./blocks/header/__content/header__content.css');
+@import url('./blocks/header/__link-container/header__link-container.css');
+@import url('./blocks/header/__link-signup/header__link-signup.css');
+@import url('./blocks/header/__link-signin/header__link-signin.css');
+*/
+@import url('./blocks/logo/logo.css');
+@import url('./blocks/promo/promo.css');
+/* @import url('./blocks/promo/__title/promo__title.css');
+@import url('./blocks/promo/__container/promo__container.css');
+@import url('./blocks/promo/__navigation/promo__navigation.css');
+@import url('./blocks/promo/__link-container/promo__link-container.css');
+@import url('./blocks/promo/__link/promo__link.css');
+@import url('./blocks/promo/__link-wrapper/promo__link-wrapper.css'); */
+@import url('./blocks/navigation/navigation.css');
+@import url('./blocks/navigation/__links/navigation__links.css');
+/* @import url('./blocks/aboutproject/aboutproject.css'); */
+@import url('./blocks/section/section.css');
+@import url('./blocks/section/__title/section__title.css');
+@import url('./blocks/section/__title-wrapper/section__title-wrapper.css');
+/* @import url('./blocks/project-table/project-table.css');
+@import url('./blocks/project-table/__cell/project-table__cell.css');
+@import url('./blocks/project-table/__heading/project-table__heading.css');
+@import url('./blocks/project-table/__text/project-table__text.css');
+@import url('./blocks/period/period.css');
+@import url('./blocks/period/__heading/period__heading.css');
+@import url('./blocks/period/__text/period__text.css');
+@import url('./blocks/techs/techs.css');
+@import url('./blocks/techs/__description/techs__description.css');
+@import url('./blocks/techs/__title/techs__title.css');
+@import url('./blocks/techs/__text/techs__text.css');
+@import url('./blocks/techs/__icons/techs__icons.css');
+@import url('./blocks/techs/__icon/techs__icon.css');
+@import url('./blocks/techs/__icon/techs__icon-text.css');
+@import url('./blocks/aboutme/__container/aboutme__container.css');
+@import url('./blocks/aboutme/__info/aboutme__info.css');
+@import url('./blocks/aboutme/__name/aboutme__name.css');
+@import url('./blocks/aboutme/__profession/aboutme__profession.css');
+@import url('./blocks/aboutme/__description/aboutme__description.css');
+@import url('./blocks/aboutme/__foto/aboutme__foto.css');
+@import url('./blocks/aboutme/__social/aboutme__social.css');
+@import url('./blocks/aboutme/__link-container/aboutme__link-container.css');
+@import url('./blocks/aboutme/__social-link/aboutme__social-link.css');
+@import url('./blocks/portfolio/__title/portfolio__title.css');
+@import url('./blocks/portfolio/__links/portfolio__links.css');
+@import url('./blocks/portfolio/__link-container/portfolio__link-container.css');
+@import url('./blocks/portfolio/__link/portfolio__link.css');
+@import url('./blocks/portfolio/__icon/portfolio__icon.css');
+@import url('./blocks/footer/footer.css');
+@import url('./blocks/footer/__title/footer__title.css');
+@import url('./blocks/footer/__content/footer__content.css');
+@import url('./blocks/footer/__copyrigh/footer__copyrigh.css');
+@import url('./blocks/footer/__links/footer__links.css');
+@import url('./blocks/footer/__link-container/footer__link-container.css');
+@import url('./blocks/footer/__link/footer__link.css');*/
+/* @import url('./blocks/search/search.css');
+@import url('./blocks/search/__input/search__input.css');
+@import url('./blocks/search/__form/search__form.css');
+@import url('./blocks/search/__button/search__button.css');
+@import url('./blocks/search/__button-icon/search__button-icon.css'); */
+
+
+
+/*
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+ */

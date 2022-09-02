@@ -1,0 +1,6 @@
+.search{
+  min-height: 222px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #E8E8E8;
+}

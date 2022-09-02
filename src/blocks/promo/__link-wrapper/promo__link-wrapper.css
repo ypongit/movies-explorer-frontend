@@ -1,0 +1,7 @@
+.promo__link-wrapper{
+  margin-right: 40px;
+}
+
+.promo__link-wrapper:last-of-type{
+  margin: 0;
+}

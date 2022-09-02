@@ -1,0 +1,7 @@
+.aboutme__social{
+  list-style-type: none;
+  margin: 0;
+  margin-top: 99px;
+  padding: 0;
+  display: flex;
+}
