@@ -1,7 +1,8 @@
 .page {
   margin: 0 auto;
   font-family: 'Inter', Arial, sans-serif;
-  background-color: #FFF;
+  background-color: #202020;
+  color: #FFF;
   /* max-width: 1280px; */
 
 }

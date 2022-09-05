@@ -8,17 +8,17 @@ import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 import "./Main.css";
-import logo from '../../images/logo.png';
+import logo from '../../images/logo.svg';
 import MenuBurger from "../MenuBurger/MenuBurger";
 
 function Main() {
-  const logged = true;
+  const loggedIn = false;
 
   return (
     <>
       <MenuBurger />
       <Header
-        logged={logged}
+        loggedIn={loggedIn}
         headerMain=" header_main"
         moviesMain=" header__link-movies_main"
         profileText=""

@@ -11,7 +11,7 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  color: #A0A0A0;
+  color: #8B8B8B;
 }
 .footer__content {
   padding-top: 20px;
@@ -37,6 +37,7 @@
 }
 .footer__link{
   text-decoration: none;
+  color: #FFF;
 }
 
 @media screen and (max-width: 400px) {

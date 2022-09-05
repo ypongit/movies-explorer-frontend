@@ -1,9 +1,8 @@
 import React from "react";
-import "./MoviesCard.css";
-import movie from '../../images/cardimg/33words.png';
-import like from '../../images/likeactive.svg'
+import "./SavedMoviesCard.css";
+import delmovie from '../../images/delmovie.svg'
 
-function MoviesCard(
+function SavedMoviesCard(
   { name,
     link
   }
@@ -19,7 +18,7 @@ function MoviesCard(
       />
       <div className="movie__heading">
         <h3 className="movie__heading-title">{name}</h3>
-        <label className="movie__save">
+        {/* <label className="movie__save">
         <input
           type='checkbox'
           name="movieSave"
@@ -27,19 +26,19 @@ function MoviesCard(
           className="movie__check"
         />
         <span></span>
-      </label>
-        {/*<div className="movie__save-wrapper">
+      </label> */}
+
            <button
-            className="movie__save-button"
+            className="movie__del-button"
           ><img
-            src={like}
+            src={delmovie}
             alt="лайк"
           ></img></button>
-        </div>*/}
-      </div>
+        </div>
+
       <span className="movie__duration">1ч42м</span>
     </article>
   )
 }
 
-export default MoviesCard;
+export default SavedMoviesCard;

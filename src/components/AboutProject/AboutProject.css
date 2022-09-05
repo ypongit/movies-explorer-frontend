@@ -35,14 +35,15 @@
 .aboutproject__period-title {
   margin: 0;
   padding: 9px;
-  background-color: #F2F2F2;
+  background-color: #303030;
+  color: #FFFFFF;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
 }
 .aboutproject__period-title:first-child {
-  background-color: #2BE080;
+  background-color: #3DDC84;
 }
 .aboutproject__period-text {
   font-style: normal;
@@ -50,7 +51,7 @@
   font-size: 14px;
   line-height: 17px;
   /* identical to box height, or 121% */
-  color: #A0A0A0;
+  color: #8B8B8B;
 }
 
 @media screen and (max-width: 520px) {

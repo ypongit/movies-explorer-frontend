@@ -2,9 +2,12 @@ import React from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
 
-import logo from "../../images/logo1.svg";
+import logo from "../../images/logo.svg";
 
-function Login () {
+function Login ({
+  currentUser,
+  currentMail
+}) {
   return (
     <section className="sign">
       <div className="sign__header">
@@ -18,7 +21,7 @@ function Login () {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder={currentMail}
           className="sign__input"
           required
         >

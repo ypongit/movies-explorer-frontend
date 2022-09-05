@@ -1,21 +1,20 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import logo from '../../images/logo.png';
-import logo1 from '../../images/logo1.svg';
+import logo from '../../images/logo.svg';
 // import menuhide from '../../images/menuhide.svg';
 import './Header.css';
 // import MenuBurger from '../MenuBurger/MenuBurger'
 
 function Header({
-  logged,
+  loggedIn,
   headerMain,
   moviesMain,
   profileText,
   linkProfile,
   headerLogo
 }) {
-  console.log(logged);
-  const loggedIn = true;
+  console.log(loggedIn);
+  // const loggedIn = false;
   const header = "header" + headerMain;
   const linkToMovies = "header__link-movies link" + moviesMain;
   const linkToMoviesSaved = "header__link-movies link header__link-movies_saved" + moviesMain;
@@ -31,7 +30,7 @@ function Header({
           to='/'
           className="link"
         >
-          <img alt="Логотип" src={headerLogo} className="logo" />
+          <img alt="Логотип" src={logo} className="logo" />
         </Link>
         {/* <button className="header__dropdown-button">
             <img alt="кнопка меню" src={menuhide} className="header__dropdown-icon"/>

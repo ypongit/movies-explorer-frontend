@@ -29,7 +29,7 @@ function AboutMe(){
                 target='_blank'
                 className="aboutme__social-link"
               >
-                ВКонтакте
+                Facebook
               </Link>
             </li>
             <li className="aboutme__link-container">

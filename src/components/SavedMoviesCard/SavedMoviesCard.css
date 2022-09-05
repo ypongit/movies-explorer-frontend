@@ -1,0 +1,20 @@
+.movie__del-button {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .movie__image {
+    width: 339px;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .movie__image {
+    width: 300px;
+    height: 168px;
+  }
+}

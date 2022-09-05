@@ -1,7 +1,7 @@
 .techs {
   /* height: 625px; */
   /* padding-top: 100px; */
-  background-color: #F5F5F5;
+  background-color: #272727;
 }
 .techs__description {
   margin-top: 90px;
@@ -43,7 +43,7 @@
   align-items: center;
   width: 90px;
   height: 60px;
-  background-color: #E8E8E8;
+  background-color: #303030;
   border-radius: 10px;
   margin: 5px;
 }

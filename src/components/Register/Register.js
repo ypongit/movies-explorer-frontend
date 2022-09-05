@@ -2,9 +2,12 @@ import React from "react";
 import "./Register.css";
 import { Link, Route } from "react-router-dom";
 
-import logo from "../../images/logo1.svg";
+import logo from "../../images/logo.svg";
 
-function Register () {
+function Register ({
+  currentUser,
+  currentMail
+}) {
   return (
     <section className="sign">
       <div className="sign__header">

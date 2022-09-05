@@ -34,7 +34,7 @@
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
-  color: #A0A0A0;
+  color: #8B8B8B;
 }
 .sign__label:last-of-type {
   margin-bottom: 0;
@@ -44,19 +44,26 @@
   border: 0;
   margin-top: 10px;
   padding: 15px;
-  background-color: #F9F9F9;
-  border-radius: 8px;
+  color: #FFF;
+  background-color: transparent;
+  /* border-radius: 8px; */
+  border-bottom: 1px solid #424242;
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
 }
-.sign__input:invalid {
-  border: 1px solid red;
+.sign__input:focus {
+  border-bottom: 2px solid #4285F4;
+  outline: 0;
+}
+.sign__input:invalid + .sign__err {
+  visibility: visible;
 }
 .sign__err {
   color: #FF3055;
   margin-top: 10px;
+  visibility: hidden;
 }
 .sign__submit {
   margin-top: 70px;
@@ -67,8 +74,9 @@
   font-size: 14px;
   line-height: 17px;
   color: #FFFFFF;
-  background-color: #3456F3;
+  background-color: #4285F4;
   border-radius: 3px;
+  cursor: pointer;
 }
 .sign__link-wrapper {
   margin-top: 16px;

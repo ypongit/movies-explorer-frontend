@@ -5,7 +5,7 @@
   line-height: 20px;
   /* identical to box height, or 111% */
 
-  color: #A0A0A0;
+  color: #8B8B8B;
 }
 .portfolio__links {
   list-style-type: none;
@@ -30,6 +30,7 @@
 }
 .portfolio__link {
   text-decoration: none;
+  color: #FFF;
 }
 .portfolio__icon {
   width: 29px;

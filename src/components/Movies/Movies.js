@@ -5,13 +5,16 @@ import SearchForm from "../SearchForm/SearchForm";
 // import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MenuBurger from "../MenuBurger/MenuBurger";
-import logo from "../../images/logo1.svg";
+import logo from "../../images/logo.svg";
 
 function Movies(){
+  const loggedIn = true;
+  // console.log({movies});
   return(
     <>
       <MenuBurger />
       <Header
+        loggedIn={loggedIn}
         headerMain = ""
         moviesMain = ""
         linkProfile = ""
@@ -20,7 +23,9 @@ function Movies(){
       />
       <SearchForm />
       {/* <Preloader /> */}
-      <MoviesCardList />
+      <MoviesCardList
+
+      />
       <Footer />
     </>
   )

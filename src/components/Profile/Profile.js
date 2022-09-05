@@ -1,19 +1,24 @@
 import React from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
-import logo from "../../images/logo1.svg";
+import logo from "../../images/logo.svg";
+import MenuBurger from "../MenuBurger/MenuBurger";
 
 function Profile ({
-  currentUser
+  currentUser,
+  currentMail
 }) {
+  const loggedIn=true;
   return (
     <>
+      <MenuBurger />
       <Header
         headerMain = ""
         moviesMain = ""
         linkProfile = ""
         profileText = "Аккаунт"
         headerLogo={logo}
+        loggedIn={loggedIn}
       />
 
       <section className="profile">
@@ -27,7 +32,7 @@ function Profile ({
               className="profile__input"
               name="name"
               type="text"
-              placeholder="currentUser"
+              placeholder={currentUser}
               >
             </input>
             </label>
@@ -37,7 +42,7 @@ function Profile ({
                 className="profile__input"
                 name="email"
                 type="email"
-                placeholder="currentUser"
+                placeholder={currentMail}
                 >
               </input>
 

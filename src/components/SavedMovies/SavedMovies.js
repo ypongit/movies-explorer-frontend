@@ -3,9 +3,9 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import SavedMoviesCardList from "../SavedMoviesCardList/SavedMoviesCardList";
 import MenuBurger from "../MenuBurger/MenuBurger";
-import logo from "../../images/logo1.svg";
+import logo from "../../images/logo.svg";
 
 function SavedMovies () {
   return(
@@ -20,7 +20,8 @@ function SavedMovies () {
       />
       <SearchForm />
       {/* <Preloader /> */}
-      <MoviesCardList />
+      <SavedMoviesCardList />
+
       <Footer />
     </main>
   )

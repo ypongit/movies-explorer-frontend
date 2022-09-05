@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./MoviesCardList.css";
-import MoviesCard from "../MoviesCard/MoviesCard";
-import initialMovies from '../../utils/initialMovies';
+import "./SavedMoviesCardList";
+import SavedMoviesCard from "../SavedMoviesCard/SavedMoviesCard";
+import initialMovies from '../../utils/savedInitialMovies';
 
-function MoviesCardList() {
+function SavedMoviesCardList() {
   // const [movies, setMovies] = React.useState([]);
 
     const moviesData = initialMovies.map(item => {
@@ -19,9 +19,10 @@ function MoviesCardList() {
   return(
     <main className="movies content">
       <section className="movies-cards">
+
         {
           moviesData.map(film => (
-            <MoviesCard
+            <SavedMoviesCard
               name={film.name}
               link={film.link}
             />
@@ -37,4 +38,4 @@ function MoviesCardList() {
   )
 }
 
-export default MoviesCardList;
+export default SavedMoviesCardList;

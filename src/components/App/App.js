@@ -14,8 +14,19 @@ import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+   /* const [loggedIn, setLoggedIn] = useState(false);
+  const [movies, setMovies] = React.useState([]);
 
+   const moviesData = initialMovies.map(item => {
+    return {
+      name: item.name,
+      link: item.link
+    }
+  });
+  // Сохраняем карточки в стейт cards
+  setMovies(moviesData);
+  // console.log({movies});
+*/
   return (
 
       <div className="page">
@@ -30,13 +41,20 @@ function App() {
           <Route path="/profile">
             <Profile
               currentUser="Юрий"
+              currentMail="ypochta@yandex.ru"
             />
           </Route>
           <Route path="/signup">
-            <Register />
+            <Register
+              currentUser="Юрий"
+              currentMail="ypochta@yandex.ru"
+            />
           </Route>
           <Route path="/signin">
-            <Login  />
+            <Login
+              currentUser="Юрий"
+              currentMail="pochta@yandex.ru"
+            />
           </Route>
           <Route path="/about">
             <AboutProject />
