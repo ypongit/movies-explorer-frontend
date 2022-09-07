@@ -5,8 +5,8 @@ import './Portfolio.css';
 
 function Portfolio() {
   return(
-    <section className="portfolio section">
-      <div className="content">
+    <section className="portfolio">
+      <div className="section">
         <h2 className="portfolio__title">Портфолио</h2>
       <ul className="portfolio__links">
         <li className="portfolio__link-container">
@@ -16,8 +16,9 @@ function Portfolio() {
             target='_blank'
           >
             Статичный сайт
+            <img src={porticon} className="portfolio__icon" alt="переход" />
           </Link>
-          <img src={porticon} className="portfolio__icon" />
+
         </li>
         <li className="portfolio__link-container">
           <Link
@@ -26,8 +27,9 @@ function Portfolio() {
             target='_blank'
           >
             Адаптивный сайт
+            <img src={porticon} className="portfolio__icon" alt="переход" />
           </Link>
-          <img src={porticon} className="portfolio__icon" />
+
         </li>
         <li className="portfolio__link-container">
           <Link
@@ -36,8 +38,9 @@ function Portfolio() {
             target='_blank'
           >
             Одностраничное приложение
+            <img src={porticon} className="portfolio__icon" alt="переход" />
           </Link>
-          <img src={porticon} className="portfolio__icon" />
+
         </li>
       </ul>
 

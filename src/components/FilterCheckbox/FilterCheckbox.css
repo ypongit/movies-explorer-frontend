@@ -14,8 +14,13 @@
   width: 36px;
   height: 20px;
   display: block;
-}
 
+}
+.filter-checkbox__input {
+  visibility: hidden;
+  width: 1px;
+  height: 1px;
+}
 .filter-checkbox__input + span {
   /* position: absolute; */
   display: inline-block;
@@ -25,6 +30,19 @@
   background: url(../../images/tumbFilter.svg) no-repeat;
   background-position: -7px -5px;
 }
+.filter-checkbox__input + span:hover {
+  cursor: pointer;
+}
 .filter-checkbox__input:checked + span {
   background-position: -7px -25px;
+}
+
+@media screen and (max-width: 400px) {
+  .filter-checkbox__input + span {
+    background: url(../../images/filter320px.svg) no-repeat;
+    background-position: 0px 2px;
+  }
+  .filter-checkbox__input:checked + span {
+    background-position: 0px -19px;
+}
 }

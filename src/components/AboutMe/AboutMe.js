@@ -6,7 +6,7 @@ import './AboutMe.css';
 function AboutMe(){
   return(
     <section className="aboutme section">
-      <div className="content">
+      {/* <div className="content"></div> */}
       <div className="section__title-wrapper">
         <h2 className="section__title">Студент</h2>
       </div>
@@ -46,7 +46,7 @@ function AboutMe(){
         <img alt="фото" src={myfoto} className="aboutme__foto" />
       </div>
 
-      </div>
+
     </section>
   )
 }

@@ -14,4 +14,7 @@
   .section__title-wrapper {
     margin: 0;
   }
+  .techs_title-wrapper {
+    border-color: #000;
+  }
 }

@@ -30,6 +30,7 @@ function MoviesCard(
       </label>
         {/*<div className="movie__save-wrapper">
            <button
+            type="button"
             className="movie__save-button"
           ><img
             src={like}

@@ -3,9 +3,9 @@ import "./Techs.css";
 
 function Techs() {
   return(
-    <section id="techs" className="techs section">
-      <div className="content">
-      <div className="section__title-wrapper">
+    <section id="techs" className="techs">
+      <div className="section">
+      <div className="section__title-wrapper techs_title-wrapper">
         <h2 className="section__title">Технологии</h2>
       </div>
       <div className="techs__description">
@@ -21,8 +21,8 @@ function Techs() {
           <li className="techs__icon"><span className="techs__icon-text">mongoDB</span></li>
         </ul>
       </div>
-
       </div>
+
     </section>
   )
 }

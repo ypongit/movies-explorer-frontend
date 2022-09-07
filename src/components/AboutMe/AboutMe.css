@@ -4,7 +4,7 @@
   justify-content: space-between;
 }
 .aboutme__info {
-  max-width: 600px;
+  max-width: 60%;
 }
 .aboutme__name {
   margin: 0;
@@ -53,9 +53,9 @@
 }
 
 @media screen and (max-width: 800px) {
-  .aboutme__info {
+  /* .aboutme__info {
     max-width: 364px;
-  }
+  } */
   .aboutme__name {
     font-size: 40px;
     line-height: 40px;
@@ -75,7 +75,11 @@
     margin-top: 87px;
   }
 }
-
+@media screen and (max-width: 600px) {
+  .aboutme__info {
+    max-width: 40%;
+  }
+}
 @media screen and (max-width: 400px) {
   .aboutme__container {
     flex-direction: column;
@@ -83,7 +87,7 @@
     margin-top: 66px;
   }
   .aboutme__info {
-    max-width: 292px;
+    max-width: 100%;
     margin-top: 392px;
     margin-left: 14px;
     margin-right: 14px;

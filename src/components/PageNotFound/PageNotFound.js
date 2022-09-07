@@ -14,7 +14,7 @@ function PageNotFound () {
         Страница не найдена
       </p>
       {/* <Link className="link link_type_to-main" to="/">Назад</Link> */}
-      <button className="not-found__back" onClick={() => history.goBack()}>Назад</button>
+      <button type="button" className="not-found__back" onClick={() => history.goBack()}>Назад</button>
     </div>
   )
 }

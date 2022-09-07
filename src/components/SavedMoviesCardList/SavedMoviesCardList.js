@@ -17,7 +17,7 @@ function SavedMoviesCardList() {
   setMovies(moviesData); */
 
   return(
-    <main className="movies content">
+    <main className="movies section">
       <section className="movies-cards">
 
         {

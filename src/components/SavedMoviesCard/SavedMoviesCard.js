@@ -29,6 +29,7 @@ function SavedMoviesCard(
       </label> */}
 
            <button
+            type="button"
             className="movie__del-button"
           ><img
             src={delmovie}

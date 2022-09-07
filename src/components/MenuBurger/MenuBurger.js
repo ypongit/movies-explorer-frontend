@@ -24,7 +24,7 @@ function MenuBurger () {
           <li className="menu-burger__item">
           <Link
               className="menu-burger__link"
-              to='/saved-movies'>
+              to='/movies'>
                 Фильмы
             </Link>
           </li>
@@ -41,7 +41,7 @@ function MenuBurger () {
               <Link
               className='menu-burger__link'
               to='/profile'>
-              <button className="menu-burger__profile-btn">
+              <button type="button" className="menu-burger__profile-btn">
                 Аккаунт
               </button>
             </Link>

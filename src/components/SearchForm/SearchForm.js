@@ -5,7 +5,7 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox.js"
 
 function SearchForm(){
   return(
-    <section className="search content">
+    <section className="search section">
       <div className="search__wrapper">
         <form className="search__form">
             <input
@@ -13,8 +13,9 @@ function SearchForm(){
               type="text"
               name="film"
               placeholder="Фильм"
+              required
             />
-            <button className="search__button">
+            <button type="button" className="search__button">
               <img src={findButton}
                 alt="кнопка поиска"
 

@@ -17,7 +17,7 @@ function MoviesCardList() {
   setMovies(moviesData); */
 
   return(
-    <main className="movies content">
+    <main className="movies section">
       <section className="movies-cards">
         {
           moviesData.map(film => (
@@ -30,7 +30,7 @@ function MoviesCardList() {
 
       </section>
       <div className="movies-cards__more">
-        <button className="movies-cards__more-button">Ещё</button>
+        <button type="button" className="movies-cards__more-button">Ещё</button>
       </div>
     </main>
 

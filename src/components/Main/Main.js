@@ -25,19 +25,18 @@ function Main() {
         linkProfile=" header__link-profile_main"
         headerLogo={logo}
       />
+      <main className="content">
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <Portfolio />
+      </main>
 
 
-      <Promo />
-      {/* <Navigation /> */}
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
       <Footer />
 
-      {/* <main className="content">
-        <h2>Компонент Main</h2>
-      </main> */}
+
     </>
   );
 }

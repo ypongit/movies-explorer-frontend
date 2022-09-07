@@ -9,7 +9,7 @@ import logo from "../../images/logo.svg";
 
 function SavedMovies () {
   return(
-    <main className="movies">
+    <>
       <MenuBurger />
       <Header
         headerMain = ""
@@ -18,12 +18,13 @@ function SavedMovies () {
         profileText = "Аккаунт"
         headerLogo={logo}
       />
+
       <SearchForm />
       {/* <Preloader /> */}
       <SavedMoviesCardList />
 
       <Footer />
-    </main>
+    </>
   )
 }
 

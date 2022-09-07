@@ -25,14 +25,14 @@ function Header({
     <header className={header}>
       {loggedIn ? (
 
-        <div className="header__content content">
+        <div className="header__content">
         <Link
           to='/'
           className="link"
         >
           <img alt="Логотип" src={logo} className="logo" />
         </Link>
-        {/* <button className="header__dropdown-button">
+        {/* <button type="button" className="header__dropdown-button">
             <img alt="кнопка меню" src={menuhide} className="header__dropdown-icon"/>
           </button> */}
           <nav className="header__link-container">
@@ -57,7 +57,7 @@ function Header({
 
       </div>
       ) : (
-        <div className="header__content content">
+        <div className="header__content">
 
         <Link
           to='/'
