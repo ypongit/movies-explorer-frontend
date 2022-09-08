@@ -15,7 +15,7 @@ function SearchForm(){
               placeholder="Фильм"
               required
             />
-            <button type="button" className="search__button">
+            <button type="submit" className="search__button">
               <img src={findButton}
                 alt="кнопка поиска"
 
