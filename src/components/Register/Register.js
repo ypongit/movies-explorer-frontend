@@ -1,60 +1,101 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Register.css";
-import { Link, Route } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-function Register ({
-  currentUser,
-  currentMail
-}) {
+function Register (props) {
+  /* const [state, setState] = useState({
+    name: '',
+    email: '',
+    password: '',
+    message: ''
+  }) */
+  const {values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+  const { name, email, password } = values;
+  /* const handleChange = (e) => {
+    const {name, value} = e.target;
+    setState((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  } */
+  // let InfoTooltipTitle = props.InfoTooltipTitle.title;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // let {name, email, password} = state;
+    isValid &&
+      props.handleRegister({name, email, password}, () => {
+        resetForm();
+      });
+      props.handleInfoTooltipClick()
+  }
+
   return (
     <section className="sign">
       <div className="sign__header">
         <Link to='/' className="sign__home">
-        <img src={logo} alt="логотип" className="sign__logo"></img>
-      </Link>
+          <img src={logo} alt="логотип" className="sign__logo"></img>
+        </Link>
       <h2 className="sign__title">Добро пожаловать!</h2>
     </div>
-    <form className="sign__form">
-      <label className="sign__label">Имя
-        <input
-          type="text"
+    <form
+      id="form"
+      className="sign__form"
+      onSubmit={handleSubmit}
+      name='signup_form'
+      noValidate
+    >
+
+      <label className="sign__label" htmlFor="username">Имя
+        <input className="sign__input"
+          type='text'
           placeholder="Имя"
           name="name"
-          className="sign__input"
+          id="name"
           required
-        >
-
-        </input>
+          minLength='2'
+          maxLength='30'
+          onChange={handleChange}
+          value={name || ''}
+          />
+          <span className="sign__err">{errors.name}</span>
       </label>
-      <label className="sign__label">E-mail
-        <input
+
+      <label className="sign__label" htmlFor="email">E-mail
+        <input className="sign__input"
           type="email"
           name="email"
+          id="email"
           placeholder="Email"
-          className="sign__input"
+          minLength='2'
+          maxLength='30'
           required
-        >
-        </input>
+          onChange={handleChange}
+          value={email || ''}
+        />
+        <span className="sign__err">{errors.email}</span>
       </label>
-      <label className="sign__label">Пароль
-        <input
+      <label className="sign__label" htmlFor="password">Пароль
+        <input className="sign__input"
           type="password"
-          minLength="6"
-          maxLength="30"
+          id='password'
           name="password"
-          placeholder="Пароль, минимум 6 смволов"
-          className="sign__input"
           required
-        >
-        </input>
-        <span className="sign__err">Что-то пошло не так...</span>
+          minLength="6"
+          maxLength="20"
+          placeholder="Пароль, минимум 6 смволов"
+          value={password || ''}
+          onChange={handleChange}
+        />
+        <span className="sign__err">{errors.password}</span>
       </label>
-
+      {/* <p>{InfoTooltipTitle}</p> */}
       <button
-          className="sign__submit"
+          className={isValid ? "sign__submit" : "sign__submit sign__submit_disabled"}
           type='submit'
+          aria-label="Кнопка зарегистрироваться"
+          disabled={!isValid}
         >Зарегистрироваться</button>
         <div className="sign__link-wrapper">
           <span className="sign__question">Уже зарегистрированы?</span>

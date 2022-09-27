@@ -3,21 +3,34 @@ import "./SavedMoviesCard.css";
 import delmovie from '../../images/delmovie.svg'
 
 function SavedMoviesCard(
-  { name,
-    link
+  {
+    movie,
+    onMovieSave,
+    onMovieDelete,
+    checkIsSavedStatus
   }
+
 ) {
-  console.log("MoviesCard.link =>", link)
+  const setDuration = (data) => {
+    const hours = Math.floor(data/60);
+    const minutes = data % 60;
+    return `${hours ? hours + 'ч' : ''} ${minutes}м`;
+  }
+  const handleDeleteClick = () => {
+    // console.log(movie)
+    onMovieDelete(movie);
+  }
+  // console.log("MoviesCard.link =>", link)
   return(
     <article className="movie">
       <img
         alt="фильм"
-        src={link}
+        src={movie.image}
         // src={movie}
         className="movie__image"
       />
       <div className="movie__heading">
-        <h3 className="movie__heading-title">{name}</h3>
+        <h3 className="movie__heading-title">{movie.nameRU}</h3>
         {/* <label className="movie__save">
         <input
           type='checkbox'
@@ -31,13 +44,14 @@ function SavedMoviesCard(
            <button
             type="button"
             className="movie__del-button"
+            onClick={handleDeleteClick}
           ><img
             src={delmovie}
             alt="лайк"
           ></img></button>
         </div>
 
-      <span className="movie__duration">1ч42м</span>
+      <span className="movie__duration">{setDuration(movie.duration)}</span>
     </article>
   )
 }

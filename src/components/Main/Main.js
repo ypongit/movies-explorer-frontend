@@ -12,13 +12,13 @@ import logo from '../../images/logo.svg';
 import MenuBurger from "../MenuBurger/MenuBurger";
 
 function Main() {
-  const loggedIn = false;
+
 
   return (
     <>
       <MenuBurger />
       <Header
-        loggedIn={loggedIn}
+        // loggedIn={loggedIn}
         headerMain=" header_main"
         moviesMain=" header__link-movies_main"
         profileText=""

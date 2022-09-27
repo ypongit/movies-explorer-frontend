@@ -4,17 +4,18 @@ import logo from '../../images/logo.svg';
 // import menuhide from '../../images/menuhide.svg';
 import './Header.css';
 // import MenuBurger from '../MenuBurger/MenuBurger'
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { AppContext } from '../../contexts/AppContext';
 
 function Header({
-  loggedIn,
   headerMain,
   moviesMain,
   profileText,
   linkProfile,
   headerLogo
 }) {
-  console.log(loggedIn);
-  // const loggedIn = false;
+  const value = React.useContext(AppContext);
+  // console.log('value', value);
   const header = "header" + headerMain;
   const linkToMovies = "header__link-movies link" + moviesMain;
   const linkToMoviesSaved = "header__link-movies link header__link-movies_saved" + moviesMain;
@@ -23,7 +24,7 @@ function Header({
     <>
     {/* <Route exact path='/'></Route> */}
     <header className={header}>
-      {loggedIn ? (
+      {value.loggedIn ? (
 
         <div className="header__content">
         <Link

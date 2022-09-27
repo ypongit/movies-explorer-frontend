@@ -28,13 +28,13 @@
   left: -10px; top: -16px;
   width: 100%; height: 100%;
   background: url(../../images/tumbFilter.svg) no-repeat;
-  background-position: -7px -5px;
+  background-position: -7px -25px;
 }
 .filter-checkbox__input + span:hover {
   cursor: pointer;
 }
 .filter-checkbox__input:checked + span {
-  background-position: -7px -25px;
+  background-position: -7px -5px;
 }
 
 @media screen and (max-width: 400px) {

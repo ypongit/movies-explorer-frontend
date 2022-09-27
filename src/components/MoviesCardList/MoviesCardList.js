@@ -1,37 +1,72 @@
 import React, { useState } from "react";
+import { Route } from "react-router-dom";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import initialMovies from '../../utils/initialMovies';
+import { useCurrentWidth } from '../../hooks/useCurrentWidth';
+import { getByWidth, getInitialCount } from '../../utils/loadByWidth';
+import SavedMovies from "../SavedMovies/SavedMovies";
+import SavedMoviesCard from "../SavedMoviesCard/SavedMoviesCard";
+import { AppContext } from "../../contexts/AppContext";
 
-function MoviesCardList() {
-  // const [movies, setMovies] = React.useState([]);
-
-    const moviesData = initialMovies.map(item => {
-    return {
-      name: item.name,
-      link: item.link
-    }
-  });
-  /*
-  // Сохраняем карточки в стейт cards
-  setMovies(moviesData); */
+function MoviesCardList({
+  // movies,
+  onMovieSave,
+  onMovieDelete,
+  checkIsSavedStatus
+}) {
+  const value = React.useContext(AppContext);
+  const movies = value.movies;
+  const savedMovies = value.savedMovies;
+  const width = useCurrentWidth();
+  const [visibleMoviesCount, setVisibleMoviesCount] = useState(getInitialCount(width));
+  const handleLoadMore = () => {
+    setVisibleMoviesCount((prevCount) => prevCount + getByWidth(width));
+  }
+  const isMovieLiked = (id) => {
+    return SavedMovies.includes((savedMovie) => savedMovie.id === id);
+  }
 
   return(
     <main className="movies section">
+      {movies && (<Route path='/movies'>
       <section className="movies-cards">
         {
-          moviesData.map(film => (
+          movies.slice(0, visibleMoviesCount).map(movie => (
             <MoviesCard
-              name={film.name}
-              link={film.link}
+              key={movie.id}
+              movie={movie}
+              onMovieSave={onMovieSave}
+              onMovieDelete={onMovieDelete}
+              checkIsSavedStatus={checkIsSavedStatus}
             />
           ))
         }
-
       </section>
+
       <div className="movies-cards__more">
-        <button type="button" className="movies-cards__more-button">Ещё</button>
+        <button
+          type="button"
+          className="movies-cards__more-button"
+          onClick={handleLoadMore}
+        >Ещё</button>
       </div>
+      </Route>)}
+      {savedMovies && (<Route path='/saved-movies'>
+        <h2>Saved Movies!</h2>
+      <section className="movies-cards">
+        {
+          savedMovies.slice(0, visibleMoviesCount).map(movie => (
+            <SavedMoviesCard
+              key={movie.movieId}
+              movie={movie}
+              onMovieSave={onMovieSave}
+              onMovieDelete={onMovieDelete}
+              checkIsSavedStatus={checkIsSavedStatus}
+            />
+          ))
+        }
+      </section>
+      </Route>)}
     </main>
 
   )

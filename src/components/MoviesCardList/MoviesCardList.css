@@ -33,6 +33,9 @@
     row-gap: 30px;
     column-gap: 30px;
   }
+  .movies-cards__more-button {
+    z-index: 1;
+  }
 }
 
 @media screen and (max-width: 400px) {

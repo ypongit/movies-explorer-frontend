@@ -4,25 +4,37 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import SavedMoviesCardList from "../SavedMoviesCardList/SavedMoviesCardList";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MenuBurger from "../MenuBurger/MenuBurger";
-import logo from "../../images/logo.svg";
+import { AppContext } from '../../contexts/AppContext';
 
-function SavedMovies () {
+function SavedMovies ({
+  isSearch,
+  isLoading,
+  getMovies,
+  checkLikeStatus,
+  onMovieDelete,
+  setShortMovies,
+}) {
+  const value = React.useContext(AppContext);
+  const savedMovies = value.savedMovies;
+  // console.log({savedMovies});
   return(
     <>
       <MenuBurger />
-      <Header
-        headerMain = ""
-        moviesMain = ""
-        linkProfile = ""
-        profileText = "Аккаунт"
-        headerLogo={logo}
+      <Header />
+
+      <SearchForm
+        isLoading={isLoading}
+        getMovies={getMovies}
+        setShortMovies={setShortMovies}
       />
-
-      <SearchForm />
-      {/* <Preloader /> */}
-      <SavedMoviesCardList />
-
+      {isLoading && <Preloader />}
+      {/* <SavedMoviesCardList /> */}
+      {/* {savedMovies && <MoviesCardList />} */}
+      {savedMovies && (<MoviesCardList
+        onMovieDelete={onMovieDelete}
+      />)}
       <Footer />
     </>
   )

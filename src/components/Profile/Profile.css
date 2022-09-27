@@ -39,6 +39,14 @@
   color: #FFF;
   background-color: transparent;
 }
+.profile__err {
+  color: #FF3055;
+  margin-top: 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+}
 .profile__input::placeholder {
   color: #FFF;
 }
@@ -51,6 +59,9 @@
   font-size: 13px;
   line-height: 16px;
   cursor: pointer;
+}
+.profile__button_disabled {
+  opacity: 0.6;
 }
 .profile__button:first-of-type {
   margin-top: 220px;
