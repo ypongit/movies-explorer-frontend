@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./MoviesCard.css";
 // import movie from '../../images/cardimg/33words.png';
 import like from '../../images/likeactive.svg';
@@ -13,14 +14,13 @@ function MoviesCard(
 ) {
   const isSaved = checkIsSavedStatus(movie);
 
-  // console.log({isSaved});
+  // console.log({movie});
   const setDuration = (data) => {
     const hours = Math.floor(data/60);
     const minutes = data % 60;
     return `${hours ? hours + 'ч' : ''} ${minutes}м`;
   }
   const handleSaveClick = () => {
-    // console.log({movie});
     onMovieSave(movie);
   }
   const handleDeleteClick = () => {
@@ -31,12 +31,17 @@ function MoviesCard(
   }
   return(
     <article className="movie">
-      <img
-        alt="фильм"
-        src={ `https://api.nomoreparties.co${movie.image.url}`}
-        // src={movie}
-        className="movie__image"
-      />
+      <Link
+        to={{ pathname: movie.trailerLink }}
+        target='_blank'
+      >
+        <img
+          alt="фильм"
+          src={ `https://api.nomoreparties.co${movie.image.url}`}
+          // src={movie}
+          className="movie__image"
+        />
+      </Link>
       <div className="movie__heading">
         <h3 className="movie__heading-title">{movie.nameRU}</h3>
         <label className="movie__save">

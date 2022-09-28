@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Route } from "react-router-dom";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { useCurrentWidth } from '../../hooks/useCurrentWidth';
-import { getByWidth, getInitialCount } from '../../utils/loadByWidth';
+// import { useCurrentWidth } from '../../hooks/useCurrentWidth';
+// import { getByWidth, getInitialCount } from '../../utils/loadByWidth';
 import SavedMovies from "../SavedMovies/SavedMovies";
 import SavedMoviesCard from "../SavedMoviesCard/SavedMoviesCard";
 import { AppContext } from "../../contexts/AppContext";
@@ -12,19 +12,21 @@ function MoviesCardList({
   // movies,
   onMovieSave,
   onMovieDelete,
-  checkIsSavedStatus
+  checkIsSavedStatus,
+  visibleMoviesCount,
+  loadMoreFilms
 }) {
   const value = React.useContext(AppContext);
   const movies = value.movies;
   const savedMovies = value.savedMovies;
-  const width = useCurrentWidth();
-  const [visibleMoviesCount, setVisibleMoviesCount] = useState(getInitialCount(width));
   const handleLoadMore = () => {
-    setVisibleMoviesCount((prevCount) => prevCount + getByWidth(width));
+   loadMoreFilms();
+
   }
-  const isMovieLiked = (id) => {
+
+  /* const isMovieLiked = (id) => {
     return SavedMovies.includes((savedMovie) => savedMovie.id === id);
-  }
+  } */
 
   return(
     <main className="movies section">

@@ -24,8 +24,8 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { AppContext } from '../../contexts/AppContext';
 import { SHORT_MOVIES } from '../../utils/constants';
 
-/* import { useCurrentWidth } from '../../hooks/useCurrentWidth';
-import { getByWidth, getInitialCount } from '../../utils/loadByWidth'; */
+import { useCurrentWidth } from '../../hooks/useCurrentWidth';
+import { getByWidth, getInitialCount } from '../../utils/loadByWidth';
 
 function App() {
   const history = useHistory();
@@ -182,7 +182,14 @@ const fetchMovies = () => {
       localStorage.setItem('movies', JSON.stringify(res));
     });
 }
+// Функция подгрузки дополнительных фильмов
+const width = useCurrentWidth();
 
+const [visibleMoviesCount, setVisibleMoviesCount] = useState(getInitialCount(width));
+const loadMoreFilms = () => {
+  setVisibleMoviesCount((prevCount) => prevCount + getByWidth(width));
+  // console.log({visibleMoviesCount});
+}
   /* Как только поиск произведён, текст запроса, найденные фильмы и
   состояние переключателя короткометражек сохраняются в хранилище,
   а блок появляется. */
@@ -196,12 +203,23 @@ const fetchMovies = () => {
       setIsInfoTooltipOpen(true);
       return;
     }
+    const localMovies = localStorage.getItem('movies');
+    if (localMovies) {
+      try {
+        setMovies(JSON.parse(localMovies));
+      } catch(err) {
+        console.log(err);
+        localStorage.removeItem('movies');
+        fetchMovies();
+      }
+    } else {
+      fetchMovies();
+    }
     const moviesList = JSON.parse(localStorage.getItem('movies'));
     const lastSearchList = moviesList.filter((movie) => {
-      const nameEn = movie.nameEn ? movie.nameEn : movie.nameRU;
       return (
         movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
-        movie.description.toLowerCase().includes(name.toLowerCase()) ||
+        // movie.description.toLowerCase().includes(name.toLowerCase()) ||
         movie.nameEN.toLowerCase().includes(name.toLowerCase())
       );
     });
@@ -222,7 +240,7 @@ const fetchMovies = () => {
       setIsLoading(true);
       moviesApi.getMovies()
       .then((res) => {
-        console.log('res ', res);
+        // console.log('res ', res);
         setMovies(res);
         // console.log('Поиск фильма ', movies);
         localStorage.setItem('movies', JSON.stringify(res));
@@ -443,8 +461,13 @@ useEffect(() => {
             onMovieDelete={handleDeleteMovie}
             checkIsSavedStatus={checkIsSavedStatus}
             getMovies={getMoviesList}
+            searchMovies={searchMovies}
             setShortMovies={toggleShortMovies}
-
+            useCurrentWidth={useCurrentWidth}
+            getByWidth={getByWidth}
+            getInitialCount={getInitialCount}
+            loadMoreFilms={loadMoreFilms}
+            visibleMoviesCount={visibleMoviesCount}
           />
           <ProtectedRoute
             path="/saved-movies"

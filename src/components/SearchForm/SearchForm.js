@@ -11,6 +11,7 @@ import useFormWithValidation from "../../hooks/useFormWithValidation";
 function SearchForm({
   isLoading,
   getMovies,
+  searchMovies,
   setShortMovies,
 }) {
 
@@ -24,7 +25,7 @@ function SearchForm({
 
   function handleSubmit(e) {
     e.preventDefault();
-    isValid && getMovies(name);
+    isValid && searchMovies(name);
 
     resetForm();
   }

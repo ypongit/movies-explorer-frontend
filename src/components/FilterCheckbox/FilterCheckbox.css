@@ -1,6 +1,8 @@
 .filter-checkbox{
   display: flex;
   align-items: center;
+  position: relative;
+  right: 40px;
 }
 .filter__title{
   font-style: normal;

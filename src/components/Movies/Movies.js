@@ -15,8 +15,13 @@ function Movies({
   onMovieDelete,
   checkIsSavedStatus,
   getMovies,
+  searchMovies,
   setShortMovies,
-  isLoading
+  isLoading,
+  useCurrentWidth,
+  getByWidth,
+  getInitialCount,
+  loadMoreFilms
 }){
   return(
     <>
@@ -30,6 +35,7 @@ function Movies({
       />
       <SearchForm
         getMovies={getMovies}
+        searchMovies={searchMovies}
         setShortMovies={setShortMovies}
         isLoading={isLoading}
       />
@@ -40,6 +46,10 @@ function Movies({
         onMovieSave={onMovieSave}
         checkIsSavedStatus={checkIsSavedStatus}
         onMovieDelete={onMovieDelete}
+        useCurrentWidth={useCurrentWidth}
+        getByWidth={getByWidth}
+        getInitialCount={getInitialCount}
+        loadMoreFilms={loadMoreFilms}
       />
       <Footer />
     </>
