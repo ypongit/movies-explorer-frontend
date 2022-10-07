@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
@@ -21,8 +21,20 @@ function Movies({
   useCurrentWidth,
   getByWidth,
   getInitialCount,
-  loadMoreFilms
+  loadMoreFilms,
+  fetchMovies,
+  savedMovies
 }){
+  const [queryParams, setQueryParams] = useState({});
+    // console.log({queryParams});
+    /* const filterShortMovies = localStorage.getItem('filterShortMovies');
+    const queryText = localStorage.getItem('queryText'); */
+  useEffect(() => {
+    setQueryParams({filterShortMovies: localStorage.getItem('filterShortMovies'),
+    queryText: localStorage.getItem('queryText')});
+  }, []);
+  const savedCheckboxVal = localStorage.getItem('filterShortMovies')==='true';
+
   return(
     <>
       <MenuBurger />
@@ -38,6 +50,9 @@ function Movies({
         searchMovies={searchMovies}
         setShortMovies={setShortMovies}
         isLoading={isLoading}
+        queryParams={queryParams}
+        fetchMovies={fetchMovies}
+        savedCheckboxVal={savedCheckboxVal}
       />
       {isLoading && <Preloader />}
       <MoviesCardList
@@ -50,6 +65,7 @@ function Movies({
         getByWidth={getByWidth}
         getInitialCount={getInitialCount}
         loadMoreFilms={loadMoreFilms}
+        savedMovies={savedMovies}
       />
       <Footer />
     </>

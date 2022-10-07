@@ -28,7 +28,7 @@ function Register (props) {
       props.handleRegister({name, email, password}, () => {
         resetForm();
       });
-      props.handleInfoTooltipClick()
+      // props.handleInfoTooltipClick()
   }
 
   return (

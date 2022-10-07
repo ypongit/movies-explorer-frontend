@@ -8,6 +8,7 @@ const checkResponse = (response) => {
   }
   return response.json()
     .then((res) => {
+      // console.log({res});
       throw res.message;
     })
 }
@@ -78,19 +79,7 @@ export const addMovie = (data, token) => {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${ token }`,
     },
-    body: JSON.stringify({
-      country: data.country,
-      director: data.director,
-      duration: data.duration,
-      year: data.year,
-      description: data.description,
-      image: `https://api.nomoreparties.co${data.image.url}`,
-      trailerLink: data.trailerLink,
-      thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
-      movieId: data.id,
-      nameRU: data.nameRU,
-      nameEN: data.nameEN,
-    }),
+    body: JSON.stringify({...data}),
   })
   .then(checkResponse)
 }

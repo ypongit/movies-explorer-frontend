@@ -18,7 +18,7 @@ function Login ({
     isValid && handleLogin({email, password}, () => {
       resetForm();
     });
-    handleInfoTooltipClick();
+    // handleInfoTooltipClick();
   }
 
   return (

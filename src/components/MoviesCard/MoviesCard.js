@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./MoviesCard.css";
 // import movie from '../../images/cardimg/33words.png';
 import like from '../../images/likeactive.svg';
+import { SERVER_URL, UNKNOWN_TRAILER_URL } from '../../utils/constants';
 
 function MoviesCard(
   {
@@ -13,7 +14,19 @@ function MoviesCard(
   }
 ) {
   const isSaved = checkIsSavedStatus(movie);
-
+  const movieData = {
+    country: movie.country,
+    director: movie.director,
+    duration: movie.duration,
+    year: movie.year,
+    description: movie.description,
+    image: SERVER_URL + movie.image.url,
+    trailerLink: movie.trailerLink || UNKNOWN_TRAILER_URL,
+    thumbnail: SERVER_URL + movie.image.formats.thumbnail.url,
+    movieId: movie.id,
+    nameRU: movie.nameRU || movie.nameEN,
+    nameEN: movie.nameEN || movie.nameRU
+  }
   // console.log({movie});
   const setDuration = (data) => {
     const hours = Math.floor(data/60);
@@ -21,6 +34,7 @@ function MoviesCard(
     return `${hours ? hours + 'ч' : ''} ${minutes}м`;
   }
   const handleSaveClick = () => {
+
     onMovieSave(movie);
   }
   const handleDeleteClick = () => {

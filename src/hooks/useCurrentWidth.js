@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // отслеживание текущей ширины экрана устройства
 export const useCurrentWidth = () => {
-  const [width, setWidth] = React.useState(window.innerWidth);
+  const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     let timeoutId = null;

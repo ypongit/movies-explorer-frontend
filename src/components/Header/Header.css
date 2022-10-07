@@ -35,6 +35,13 @@
   text-align: center;
   color: #000;
 }
+.header__link_active {
+  text-decoration: underline;
+}
+.header__profile_active {
+  border: #2BE080 2px solid;
+  border-radius: 20px;
+}
 .header__link-container {
   margin: 0;
   display: flex;
@@ -45,7 +52,8 @@
   z-index: 1;
 }
 .header__link-container .link:hover {
-  background-color: #2BE080;
+  /* background-color: #2BE080; */
+  border: #2BE080 2px solid;
 }
 .header__link-signup {
   margin-right: 30px;
@@ -87,6 +95,9 @@
   background-color: #313131;
   color: #FFF;
   border-radius: 20px;
+}
+.header__link-profile:hover {
+  border: #2BE080 2px solid;
 }
 .header__link-profile_main {
   background-image: url("../../images/profilebtn.svg");

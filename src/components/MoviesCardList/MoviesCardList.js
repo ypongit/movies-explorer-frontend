@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
@@ -19,11 +19,17 @@ function MoviesCardList({
   const value = React.useContext(AppContext);
   const movies = value.movies;
   const savedMovies = value.savedMovies;
+  // console.log({savedMovies})
   const handleLoadMore = () => {
    loadMoreFilms();
 
   }
-
+  const [countMoviesOnPage, setCountMoviesOnPage] = useState();
+  useEffect(() => {
+    if(movies){
+    setCountMoviesOnPage(movies.length)
+  }
+  })
   /* const isMovieLiked = (id) => {
     return SavedMovies.includes((savedMovie) => savedMovie.id === id);
   } */
@@ -45,7 +51,7 @@ function MoviesCardList({
         }
       </section>
 
-      <div className="movies-cards__more">
+      <div className={countMoviesOnPage < 4 || visibleMoviesCount > 99 ? "movies-cards__more_none" : "movies-cards__more"}>
         <button
           type="button"
           className="movies-cards__more-button"

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import logo from '../../images/logo.svg';
 // import menuhide from '../../images/menuhide.svg';
 import './Header.css';
@@ -27,33 +27,37 @@ function Header({
       {value.loggedIn ? (
 
         <div className="header__content">
-        <Link
+        <NavLink
           to='/'
           className="link"
+          activeClassName="header__link_active"
         >
           <img alt="Логотип" src={logo} className="logo" />
-        </Link>
+        </NavLink>
         {/* <button type="button" className="header__dropdown-button">
             <img alt="кнопка меню" src={menuhide} className="header__dropdown-icon"/>
           </button> */}
           <nav className="header__link-container">
             {/* <Route path='/signin'></Route> */}
-            <Link
+            <NavLink
                 className={linkToMovies}
+                activeClassName="header__link_active"
                 to='/movies'>
                 Фильмы
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
                 className={linkToMoviesSaved}
+                activeClassName="header__link_active"
                 to='/saved-movies'>
                 Сохранённые фильмы
-            </Link>
+            </NavLink>
             {/* <Route path='/signup'></Route> */}
-            <Link
-              className='header__link link'
+            <NavLink
+              className='header__link'
+              activeClassName="header__profile_active"
               to='/profile'>
-              <div className={linkToProfile}>{profileText}</div>
-            </Link>
+              <div className="header__link-profile">Аккаунт</div>
+            </NavLink>
           </nav>
 
       </div>

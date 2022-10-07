@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 import findButton from "../../images/findButton.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox.js";
@@ -13,21 +13,35 @@ function SearchForm({
   getMovies,
   searchMovies,
   setShortMovies,
+  queryParams,
+  savedCheckboxVal
 }) {
-
   // Стейт, в котором содержится значение инпута
   const [searchValue, setSearchValue] = React.useState('');
+  const [checkBoxState, setcheckBoxState] = React.useState(false);
+  // console.log({checkBoxState})
+  useEffect(() => {
+    setSearchValue(queryParams.queryText)
+  },[queryParams])
   const errText = "Нужно ввести ключевое слово";
   const [inputValidity, setInputValidity] = React.useState('');
 
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
-  const { name } = values;
-
+  // const { name } = values;
+  const name = searchValue;
+  function changeSearchText(event) {
+    setSearchValue(event.target.value);
+ }
   function handleSubmit(e) {
     e.preventDefault();
-    isValid && searchMovies(name);
 
-    resetForm();
+    /* isValid &&  */
+    searchMovies(name);
+    localStorage.setItem('queryText', name);
+
+    localStorage.setItem('filterShortMovies', checkBoxState);
+
+    // resetForm();
   }
 
   return(
@@ -48,18 +62,20 @@ function SearchForm({
               placeholder="Фильм"
               required
               maxLength="60"
-              onChange={handleChange}
-              value={name || ''}
+              onChange={changeSearchText}/* handleChange */
+              // defaultValue={searchValue || 'хрень какая то'}
+              value={searchValue || ''} /* {name || '' } */
             />
             <span className={`search__input-err ${!isValid ? 'search__input-err_enable' : ''}`}>{errors.name}</span>
           </div>
 
             <button
               type="submit"
-              className={`search__button ${
+              /* className={`search__button ${
                 !isValid ? 'search__button_disabled' : ''
-              }`}
-              disabled={!isValid}
+              }`} */
+              className="search__button"
+              // disabled={!isValid}
             >
               <img src={findButton}
               alt="кнопка поиска"
@@ -67,6 +83,9 @@ function SearchForm({
             </button>
             <FilterCheckbox
               setShortMovies={setShortMovies}
+              queryParams={queryParams}
+              setcheckBoxState={setcheckBoxState}
+              savedCheckboxVal={savedCheckboxVal}
             />
         </form>
       </div>

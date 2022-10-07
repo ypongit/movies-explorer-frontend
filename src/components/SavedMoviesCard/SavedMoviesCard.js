@@ -1,6 +1,7 @@
 import React from "react";
 import "./SavedMoviesCard.css";
 import delmovie from '../../images/delmovie.svg'
+import { Link } from "react-router-dom";
 
 function SavedMoviesCard(
   {
@@ -23,12 +24,18 @@ function SavedMoviesCard(
   // console.log("MoviesCard.link =>", link)
   return(
     <article className="movie">
-      <img
+      <Link
+      to={{ pathname: movie.trailerLink }}
+      target='_blank'
+      >
+        <img
         alt="фильм"
         src={movie.image}
         // src={movie}
         className="movie__image"
       />
+      </Link>
+
       <div className="movie__heading">
         <h3 className="movie__heading-title">{movie.nameRU}</h3>
         {/* <label className="movie__save">

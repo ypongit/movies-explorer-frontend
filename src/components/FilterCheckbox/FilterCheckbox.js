@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./FilterCheckbox.css";
 
-function FilterCheckbox({ setShortMovies }) {
+function FilterCheckbox({ setShortMovies, queryParams, setcheckBoxState, savedCheckboxVal }) {
+
+
   const [isChecked, setIsChecked] = useState(false);
+  // const savedCheckboxVal = localStorage.getItem('filterShortMovies')==='true';
+  /* console.log('savedCheckboxVal -> ', savedCheckboxVal);
+  console.log('isChecked -> ', isChecked); */
+
+  useEffect(() => {
+    setIsChecked(savedCheckboxVal);
+  }, []);
+  useEffect(() => {
+    // console.log({isChecked});
+    setShortMovies(isChecked);
+    setcheckBoxState(isChecked);
+  }, [isChecked]);
   const handleChange = (e) => {
-    setIsChecked(e.target.checked);
-    setShortMovies();
+    setIsChecked(!isChecked);
   }
+
   return(
     <div className="filter-checkbox">
 
@@ -16,8 +30,8 @@ function FilterCheckbox({ setShortMovies }) {
           name="filterCheckbox"
           id="filterCheckbox"
           className="filter-checkbox__input"
-          checked={isChecked}
-          onChange={(e) => handleChange(e)}
+          checked={isChecked || false}
+          onChange={handleChange}
         />
         <span></span>
       </label>

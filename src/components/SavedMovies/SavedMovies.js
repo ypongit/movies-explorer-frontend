@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
@@ -15,19 +15,30 @@ function SavedMovies ({
   checkLikeStatus,
   onMovieDelete,
   setShortMovies,
+  searchMovies
 }) {
+  const [queryParams, setQueryParams] = useState({});
   const value = React.useContext(AppContext);
   const savedMovies = value.savedMovies;
+  const savedCheckboxVal = false;
   // console.log({savedMovies});
   return(
     <>
       <MenuBurger />
-      <Header />
+      <Header
+        headerMain = ""
+        moviesMain = ""
+        linkProfile = ""
+        profileText = "Аккаунт"
+      />
 
       <SearchForm
         isLoading={isLoading}
         getMovies={getMovies}
+        searchMovies={searchMovies}
         setShortMovies={setShortMovies}
+        queryParams={queryParams}
+        savedCheckboxVal={savedCheckboxVal}
       />
       {isLoading && <Preloader />}
       {/* <SavedMoviesCardList /> */}

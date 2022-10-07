@@ -12,6 +12,9 @@
   padding-top: 50px;
   padding-bottom: 80px;
 }
+.movies-cards__more_none {
+  display: none;
+}
 .movies-cards__more-button {
   margin: auto;
   box-sizing: border-box;
