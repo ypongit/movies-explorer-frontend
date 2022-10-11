@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import "./MoviesCard.css";
 // import movie from '../../images/cardimg/33words.png';
@@ -10,33 +10,20 @@ function MoviesCard(
     movie,
     onMovieSave,
     onMovieDelete,
-    checkIsSavedStatus
+    checkIsSavedStatus,
+
   }
 ) {
   const isSaved = checkIsSavedStatus(movie);
-  const movieData = {
-    country: movie.country,
-    director: movie.director,
-    duration: movie.duration,
-    year: movie.year,
-    description: movie.description,
-    image: SERVER_URL + movie.image.url,
-    trailerLink: movie.trailerLink || UNKNOWN_TRAILER_URL,
-    thumbnail: SERVER_URL + movie.image.formats.thumbnail.url,
-    movieId: movie.id,
-    nameRU: movie.nameRU || movie.nameEN,
-    nameEN: movie.nameEN || movie.nameRU
-  }
-  // console.log({movie});
   const setDuration = (data) => {
     const hours = Math.floor(data/60);
     const minutes = data % 60;
     return `${hours ? hours + 'ч' : ''} ${minutes}м`;
   }
   const handleSaveClick = () => {
-
     onMovieSave(movie);
   }
+
   const handleDeleteClick = () => {
     onMovieDelete(movie);
   }

@@ -4,6 +4,7 @@ import { AppContext } from '../../contexts/AppContext'
 
 const ProtectedRoute = ({ component: Component, ...props }) => {
   const value = React.useContext(AppContext);
+
   return (
     <Route>
       {() =>

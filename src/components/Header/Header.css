@@ -74,6 +74,8 @@
   font-size: 14px;
   line-height: 18px;
   color: #FFF;
+  padding: 6px;
+  border-radius: 20px;
 }
 .header__link-movies_main {
   color: #fff;

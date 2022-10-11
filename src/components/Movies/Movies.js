@@ -25,15 +25,16 @@ function Movies({
   fetchMovies,
   savedMovies
 }){
+  const value = React.useContext(AppContext);
+  console.log({value})
+  const savedCheckboxVal = localStorage.getItem('filterShortMovies')==='true';
   const [queryParams, setQueryParams] = useState({});
     // console.log({queryParams});
     /* const filterShortMovies = localStorage.getItem('filterShortMovies');
     const queryText = localStorage.getItem('queryText'); */
   useEffect(() => {
-    setQueryParams({filterShortMovies: localStorage.getItem('filterShortMovies'),
-    queryText: localStorage.getItem('queryText')});
+    setQueryParams({ queryText: localStorage.getItem('queryText') });
   }, []);
-  const savedCheckboxVal = localStorage.getItem('filterShortMovies')==='true';
 
   return(
     <>

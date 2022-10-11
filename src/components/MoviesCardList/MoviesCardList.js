@@ -19,15 +19,14 @@ function MoviesCardList({
   const value = React.useContext(AppContext);
   const movies = value.movies;
   const savedMovies = value.savedMovies;
-  // console.log({savedMovies})
+  const [countMoviesOnPage, setCountMoviesOnPage] = useState();
   const handleLoadMore = () => {
    loadMoreFilms();
-
   }
-  const [countMoviesOnPage, setCountMoviesOnPage] = useState();
+
   useEffect(() => {
     if(movies){
-    setCountMoviesOnPage(movies.length)
+    setCountMoviesOnPage(movies.length);
   }
   })
   /* const isMovieLiked = (id) => {
@@ -51,7 +50,8 @@ function MoviesCardList({
         }
       </section>
 
-      <div className={countMoviesOnPage < 4 || visibleMoviesCount > 99 ? "movies-cards__more_none" : "movies-cards__more"}>
+      <div className={countMoviesOnPage < 4 || visibleMoviesCount > 99 ?
+        "movies-cards__more_none" : "movies-cards__more"}>
         <button
           type="button"
           className="movies-cards__more-button"

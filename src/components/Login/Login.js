@@ -5,8 +5,7 @@ import logo from "../../images/logo.svg";
 import useFormWithValidation from "../../hooks/useFormWithValidation";
 
 function Login ({
-  handleLogin,
-  handleInfoTooltipClick
+  handleLogin
 }) {
   const {values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
   const { email, password } = values;

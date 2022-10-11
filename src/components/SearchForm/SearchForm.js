@@ -18,7 +18,7 @@ function SearchForm({
 }) {
   // Стейт, в котором содержится значение инпута
   const [searchValue, setSearchValue] = React.useState('');
-  const [checkBoxState, setcheckBoxState] = React.useState(false);
+  // const [checkBoxState, setcheckBoxState] = React.useState(false);
   // console.log({checkBoxState})
   useEffect(() => {
     setSearchValue(queryParams.queryText)
@@ -39,7 +39,7 @@ function SearchForm({
     searchMovies(name);
     localStorage.setItem('queryText', name);
 
-    localStorage.setItem('filterShortMovies', checkBoxState);
+    // localStorage.setItem('filterShortMovies', checkBoxState);
 
     // resetForm();
   }
@@ -84,7 +84,7 @@ function SearchForm({
             <FilterCheckbox
               setShortMovies={setShortMovies}
               queryParams={queryParams}
-              setcheckBoxState={setcheckBoxState}
+              // setcheckBoxState={setcheckBoxState}
               savedCheckboxVal={savedCheckboxVal}
             />
         </form>

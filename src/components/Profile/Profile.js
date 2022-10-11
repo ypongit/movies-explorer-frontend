@@ -3,30 +3,40 @@ import "./Profile.css";
 import Header from "../Header/Header";
 import logo from "../../images/logo.svg";
 import MenuBurger from "../MenuBurger/MenuBurger";
-// import useFormWithValidation from '../../hooks/useFormWithValidation';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Preloader from "../Preloader/Preloader";
+import { re } from "../../utils/constants";
 
 function Profile ({ onUpdateUser, logout, isLoading }) {
   const currentUser = React.useContext(CurrentUserContext);
 
-  /* const { values, handleChange, errors, isValid, resetForm } =
-    useFormWithValidation();
+  /* const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
   const { name, email } = values; */
-  const [name, setName] = useState(currentUser.name);
-  const [email, setEmail] = useState(currentUser.email);
+  // console.log({currentUser})
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [])
+
   const [nameDirty, setNameDirty] = useState(false);
   const [emailDirty, setEmailDirty] = useState(false);
   const [nameError, setNameError] = useState('Имя не может быть пустым! ');
   const [emailError, setEmailError] = useState('Email не может быть пустым! ');
   const [ formValid, setFormValid ] = useState(false);
 
+  /* useEffect(() => {
+    setName(values.name);
+    setEmail(values.email);
+  }, [values]); */
+
   useEffect(() => {
     if (emailError || nameError) {
-      setFormValid(false)
-
+      setFormValid(false);
     } else {
-      setFormValid(true)
+      setFormValid(true);
     }
   }, [emailError, nameError]);
 
@@ -46,11 +56,10 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
   }
   const emailHandler = (e) => {
     setEmail(e.target.value);
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(e.target.value).toLowerCase())) {
       setEmailError("Некорректный емейл!");
       if(!e.target.value) {
-        setNameError("Email не может быть пустым!")
+        setNameError("Email не может быть пустым!");
       }
     } else {
       setEmailError("");
@@ -80,6 +89,7 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
       } */
     );
   }
+
   return (
     <>
       <MenuBurger />
@@ -127,6 +137,7 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
                 placeholder="Введите ваш Email" /* {currentUser.email} */
                 required
                 value={email || ''}
+                // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
                 onChange={e => emailHandler(e)}
                 onBlur={e => blurHandler(e)}
               />

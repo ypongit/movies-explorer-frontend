@@ -25,16 +25,18 @@ import { AppContext } from '../../contexts/AppContext';
 import { SHORT_MOVIES } from '../../utils/constants';
 import { useCurrentWidth } from '../../hooks/useCurrentWidth';
 import { getByWidth, getInitialCount } from '../../utils/loadByWidth';
+import { validURL } from '../../utils/validURL';
 import { SERVER_URL, UNKNOWN_TRAILER_URL, UNKNOWN_IMAGE_URL, UNKNOWN_CARD_TEXT } from '../../utils/constants';
 
 function App() {
   const history = useHistory();
   const location = useLocation();
   const token = localStorage.getItem('jwt');
+  const locLogin = localStorage.getItem('loggedIn');
   /* для хранения данных о пользователе использовать глобальную стейт-переменную
   currentUser, созданную с помощью createContext; */
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(locLogin));
   // Все фильмы
   const [movies, setMovies] = React.useState([]);
 
@@ -50,6 +52,9 @@ function App() {
     title: "",
     icon: regFail,
   });
+ /*  useEffect(() => {
+    localStorage.setItem('loggedIn', loggedIn)
+  },[loggedIn]) */
   // Проверка лок. хранилища на наличие токена
   // если у пользователя есть токен в localStorage,
     // эта функция проверит, действующий он или нет
@@ -57,12 +62,12 @@ function App() {
       if (localStorage.getItem('jwt')) {
         const jwt = localStorage.getItem('jwt');
          mainApi.getProfileInfo(jwt)
-         .then((res) => {
+        .then((res) => {
            if (res){
-             setCurrentUser(res);
-             setLoggedIn(true);
+            setCurrentUser(res);
+            setLoggedIn(true);
            }
-         })
+        })
         .catch((err) => {
           console.log(err)
           handleLogOut();
@@ -75,15 +80,14 @@ function App() {
 
 useEffect(() => {
     if (token) {
-      setLoggedIn(true);
-      console.log({loggedIn})
-      if (location.pathname === "/signup" || location.pathname === "/signin") {
+      localStorage.setItem('loggedIn', loggedIn)
+      /* if (location.pathname === "/signup" || location.pathname === "/signin") {
         history.push("/movies");
       } else {
         history.push(location.pathname);
-      }
+      } */
     }
-  }, [loggedIn, token, history, location.pathname]);
+  }, [loggedIn, token/* , history, location.pathname*/] );
 
 // Открытие и закрытие информационного попапа
   function handleInfoTooltipClick() {
@@ -93,7 +97,7 @@ useEffect(() => {
   function closeAllPopups() {
     setIsInfoTooltipOpen(false);
   }
-
+/*
 // Функция запроса фильмов.
 const fetchMovies = () => {
   moviesApi.getMovies()
@@ -102,7 +106,7 @@ const fetchMovies = () => {
       localStorage.setItem('allmovies', JSON.stringify(res));
     });
 }
-const [allMovies, setAllMovies] = useState([]); // все фильмы с сервера
+ const [allMovies, setAllMovies] = useState([]); // все фильмы с сервера
 // Проверка лок. хранилища и запрос к серверу для получения фильмов
 useEffect(() => {
   const allLocalMovies = localStorage.getItem('allMovies');
@@ -117,20 +121,18 @@ useEffect(() => {
     } else {
       fetchMovies();
     }
-}, []);
+}, []); */
 
 
 // запрос к API за данными пользователя
 useEffect(() => {
   if (loggedIn) {
-/*
     if (token){
       mainApi.getProfileInfo(token)
       .then(currentUserData => {setCurrentUser(currentUserData);
       })
       .catch((err) => console.log(err));
-
-    } */
+    }
 // запрос к API за данными о сохраненных фильмах
 const localSavedMovies = localStorage.getItem('savedMoviesList');
 if(localSavedMovies) {
@@ -151,7 +153,6 @@ if(localSavedMovies) {
 } else {
   mainApi.getUserMovies(token)
     .then((currentSavedMovies) => {
-
       setSavedMovies(currentSavedMovies.movies)
       localStorage.setItem(
         'savedMoviesList',
@@ -159,7 +160,6 @@ if(localSavedMovies) {
       );
       setLoggedIn(true);
     })
-
   .catch((err) => console.log(err));
 }
 
@@ -169,21 +169,24 @@ if(localSavedMovies) {
 // установка фильмов после перезагрузки
 useEffect(() => {
   const lastSearchList = localStorage.getItem('lastSearchList');
-  // console.log({lastSearchList})
     if (lastSearchList) {
       try {
         setMovies(JSON.parse(lastSearchList));
       } catch(err) {
         console.log(err);
         localStorage.removeItem('movies');
-        fetchMovies();
+        // fetchMovies();
       }
     } else {
       console.log("Список фильмов не обнаружен!")
     }
-}, [])
+}, []);
+
 // Функция добавления фильма в сохраненные
 const handleSaveMovie = (movie) => {
+  let trailerLink = movie.trailerLink;
+  const movieDataValid = validURL(trailerLink);
+  movieDataValid ? trailerLink = movie.trailerLink : trailerLink = UNKNOWN_TRAILER_URL;
   const movieData = {
     country: movie.country || UNKNOWN_CARD_TEXT,
     director: movie.director || UNKNOWN_CARD_TEXT,
@@ -191,12 +194,13 @@ const handleSaveMovie = (movie) => {
     year: movie.year || UNKNOWN_CARD_TEXT,
     description: movie.description || UNKNOWN_CARD_TEXT,
     image: SERVER_URL +  movie.image.url || UNKNOWN_IMAGE_URL,
-    trailerLink: movie.trailerLink || UNKNOWN_TRAILER_URL,
+    trailerLink: trailerLink || UNKNOWN_TRAILER_URL,
     thumbnail: SERVER_URL + movie.image.formats.thumbnail.url || UNKNOWN_IMAGE_URL,
     movieId: movie.id,
     nameRU: movie.nameRU || movie.nameEN || UNKNOWN_CARD_TEXT,
     nameEN: movie.nameEN || movie.nameRU || UNKNOWN_CARD_TEXT,
   }
+
   const token = localStorage.getItem('jwt');
   if (token) {
     setIsSending(true);
@@ -271,9 +275,9 @@ const [visibleMoviesCount, setVisibleMoviesCount] = useState(getInitialCount(wid
 const loadMoreFilms = () => {
   setVisibleMoviesCount((prevCount) => prevCount + getByWidth(width));
   // console.log({visibleMoviesCount});
-  setMovies(allMovies);
+  setMovies(movies);
 }
-
+// Поиск фильмов
 const searchMovies = (name) => {
   if (!name) {
     setInfoTooltipTitle({
@@ -288,7 +292,6 @@ const searchMovies = (name) => {
     setIsLoading(true)
 
   moviesApi.getMovies()
-
     .then((res) => {
       setMovies(res);
       localStorage.setItem('movies', JSON.stringify(res));
@@ -409,7 +412,7 @@ const searchMovies = (name) => {
           icon: regFail,
           title: "Что-то пошло не так! Попробуйте ещё раз."
         })
-        // handleInfoTooltipClick();
+        setIsInfoTooltipOpen(true);
       }
       history.push('/movies');
     })
@@ -442,8 +445,10 @@ const searchMovies = (name) => {
         icon: regSuccess,
         title: 'Доступ предоставлен!'
       });
-      setIsInfoTooltipOpen(true);
       history.push('/movies');
+  })
+  .then(() => {
+    setIsInfoTooltipOpen(true);
   })
   .catch((err) => {
     console.log(err);
@@ -467,7 +472,8 @@ const searchMovies = (name) => {
     localStorage.removeItem('lastSearchList');
     localStorage.removeItem('savedMoviesList'); // сохраненные фильмы
     localStorage.removeItem('queryText'); // текст запроса
-    localStorage.removeItem('allmovies'); // текст запроса
+    localStorage.removeItem('loggedIn');
+    // localStorage.removeItem('allmovies'); // текст запроса
     setMovies([]);
     setSavedMovies([]);
     history.push('/');
@@ -526,7 +532,6 @@ useEffect(() => {
   const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
   isShortSavedMovies ? setSavedMovies((state) => state.filter((i) => i.duration <= SHORT_MOVIES))
   : setSavedMovies(savedMoviesList);
-
 }, [isShortSavedMovies]);
 
   return (

@@ -71,6 +71,8 @@ function Register (props) {
           minLength='2'
           maxLength='30'
           required
+          title="Доменная часть адреса электронной почты указана неверно"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
           onChange={handleChange}
           value={email || ''}
         />
