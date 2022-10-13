@@ -14,11 +14,19 @@ function SearchForm({
   searchMovies,
   setShortMovies,
   queryParams,
-  savedCheckboxVal
+  savedCheckboxVal,
+  setcheckBoxState
 }) {
   // Стейт, в котором содержится значение инпута
   const [searchValue, setSearchValue] = React.useState('');
-  // const [checkBoxState, setcheckBoxState] = React.useState(false);
+
+  const [isChecked, setIsChecked] = useState(savedCheckboxVal);
+  // const [checkBoxState, setcheckBoxState] = useState(savedCheckboxVal);
+
+  /* useEffect(() => {
+    localStorage.setItem('filterShortMovies', checkBoxState);
+  }, [checkBoxState]); */
+
   // console.log({checkBoxState})
   useEffect(() => {
     setSearchValue(queryParams.queryText)
@@ -38,7 +46,6 @@ function SearchForm({
     /* isValid &&  */
     searchMovies(name);
     localStorage.setItem('queryText', name);
-
     // localStorage.setItem('filterShortMovies', checkBoxState);
 
     // resetForm();
@@ -63,7 +70,6 @@ function SearchForm({
               required
               maxLength="60"
               onChange={changeSearchText}/* handleChange */
-              // defaultValue={searchValue || 'хрень какая то'}
               value={searchValue || ''} /* {name || '' } */
             />
             <span className={`search__input-err ${!isValid ? 'search__input-err_enable' : ''}`}>{errors.name}</span>
@@ -84,7 +90,8 @@ function SearchForm({
             <FilterCheckbox
               setShortMovies={setShortMovies}
               queryParams={queryParams}
-              // setcheckBoxState={setcheckBoxState}
+              setIsChecked={setIsChecked}
+              setcheckBoxState={setcheckBoxState}
               savedCheckboxVal={savedCheckboxVal}
             />
         </form>

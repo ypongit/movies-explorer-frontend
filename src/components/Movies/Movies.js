@@ -23,15 +23,14 @@ function Movies({
   getInitialCount,
   loadMoreFilms,
   fetchMovies,
-  savedMovies
+  savedMovies,
+  setcheckBoxState,
+  isInfoTooltipOpen
 }){
   const value = React.useContext(AppContext);
-  console.log({value})
   const savedCheckboxVal = localStorage.getItem('filterShortMovies')==='true';
   const [queryParams, setQueryParams] = useState({});
-    // console.log({queryParams});
-    /* const filterShortMovies = localStorage.getItem('filterShortMovies');
-    const queryText = localStorage.getItem('queryText'); */
+
   useEffect(() => {
     setQueryParams({ queryText: localStorage.getItem('queryText') });
   }, []);
@@ -54,8 +53,10 @@ function Movies({
         queryParams={queryParams}
         fetchMovies={fetchMovies}
         savedCheckboxVal={savedCheckboxVal}
+        setcheckBoxState={setcheckBoxState}
       />
       {isLoading && <Preloader />}
+      {/* {isInfoTooltipOpen && <h2>Нужно ввести ключевое слово</h2>} */}
       <MoviesCardList
         movies={movies}
         visibleMoviesCount={visibleMoviesCount}

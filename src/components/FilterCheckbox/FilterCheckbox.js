@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./FilterCheckbox.css";
 
-function FilterCheckbox({ setShortMovies, savedCheckboxVal/* queryParams,  setcheckBoxState,  */}) {
-
+function FilterCheckbox({ setShortMovies, savedCheckboxVal, setcheckBoxState }) {
 
   const [isChecked, setIsChecked] = useState(savedCheckboxVal);
-  const [checkBoxState, setcheckBoxState] = React.useState(savedCheckboxVal);
-
+  // const [checkBoxState, setcheckBoxState] = React.useState(savedCheckboxVal);
+/*
   useEffect(() => {
     localStorage.setItem('filterShortMovies', checkBoxState);
 
-  }, [checkBoxState]);
+  }, [checkBoxState]); */
 
   useEffect(() => {
     // console.log({isChecked});

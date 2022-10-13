@@ -13,7 +13,6 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
 
   /* const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
   const { name, email } = values; */
-  // console.log({currentUser})
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   useEffect(() => {
@@ -52,8 +51,8 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
       default:
         console.log("Нет таких значений")
     };
-
   }
+
   const emailHandler = (e) => {
     setEmail(e.target.value);
     if (!re.test(String(e.target.value).toLowerCase())) {

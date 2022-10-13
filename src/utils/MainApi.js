@@ -52,7 +52,6 @@ export const getProfileInfo = (token) => {
 }
   // изменение данных профиля на сервере
   export const setProfileInfo = (data, token) => {
-    console.log("setProfileInfo.data->", data)
     return fetch(`${BASE_URL}/users/me`, {
       method: "PATCH",
       headers: {

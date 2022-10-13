@@ -60,7 +60,6 @@ function MoviesCardList({
       </div>
       </Route>)}
       {savedMovies && (<Route path='/saved-movies'>
-        <h2>Saved Movies!</h2>
       <section className="movies-cards">
         {
           savedMovies.slice(0, visibleMoviesCount).map(movie => (
