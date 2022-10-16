@@ -18,12 +18,14 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
   useEffect(() => {
     setName(currentUser.name);
     setEmail(currentUser.email);
-  }, [])
+  }, [currentUser]);
 
-  const [nameDirty, setNameDirty] = useState(false);
-  const [emailDirty, setEmailDirty] = useState(false);
-  const [nameError, setNameError] = useState('Имя не может быть пустым! ');
-  const [emailError, setEmailError] = useState('Email не может быть пустым! ');
+  /* const [nameDirty, setNameDirty] = useState(false);
+  const [emailDirty, setEmailDirty] = useState(false); */
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [isMailChanged, setIsMailChanged] = useState(false);
+  const [isNameChanged, setIsNameChanged] = useState(false);
   const [ formValid, setFormValid ] = useState(false);
 
   /* useEffect(() => {
@@ -32,14 +34,14 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
   }, [values]); */
 
   useEffect(() => {
-    if (emailError || nameError) {
+    if (emailError || nameError ) {
       setFormValid(false);
-    } else {
+    } else if (isMailChanged || isNameChanged){
       setFormValid(true);
-    }
-  }, [emailError, nameError]);
+    } else {setFormValid(false) }
+  }, [emailError, nameError, isMailChanged, isNameChanged]);
 
-  const blurHandler = (e)  => {
+  /* const blurHandler = (e)  => {
     // if(e.target.name === 'email') {setEmailDirty(true)};
     switch (e.target.name) {
       case 'name':
@@ -51,11 +53,13 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
       default:
         console.log("Нет таких значений")
     };
-  }
+  } */
 
-  const emailHandler = (e) => {
+  /* const emailHandler = (e) => {
+    console.log("mail validity => ", e.target.validity.valid);
     setEmail(e.target.value);
-    if (!re.test(String(e.target.value).toLowerCase())) {
+    // if (!re.test(String(e.target.value).toLowerCase())) {
+    if (!e.target.validity.valid) {
       setEmailError("Некорректный емейл!");
       if(!e.target.value) {
         setNameError("Email не может быть пустым!");
@@ -63,11 +67,45 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
     } else {
       setEmailError("");
     }
+  } */
+
+  const checkInputMailValidity = (e) => {
+    setEmail(e.target.value)
+      if (!re.test(String(e.target.value).toLowerCase())) {
+        setEmailError("Некорректный емейл!");
+        if(!e.target.value) {
+          setEmailError("Email не может быть пустым!");
+        }
+      } else if (e.target.value === currentUser.email) {
+        //setEmailError("Данные совпадают с существующими!");
+        setIsMailChanged(false)
+      } else {
+        setIsMailChanged(true)
+      setEmailError("");
+    }
+
+  }
+  const checkInputNameValidity = (e) => {
+    setName(e.target.value)
+    if (!e.target.validity.valid) {
+      setNameError("Имя должно быть от 3 до 40 символов");
+      if(!e.target.value) {
+        setNameError("Имя не может быть пустым!")
+      }
+    } else if (e.target.value === currentUser.name) {
+      setIsNameChanged(false)
+    } else {
+      setIsNameChanged(true)
+      setNameError("");
+    }
   }
 
-  const nameHandler = (e) => {
+
+  /* const nameHandler = (e) => {
+    console.log("name validity => ", e.target.validity.valid);
     setName(e.target.value);
-    if (e.target.value.length < 2 || e.target.value > 40) {
+    // if (e.target.value.length < 2 || e.target.value > 40) {
+    if (!e.target.validity.valid) {
       setNameError("Имя должно быть от 3 до 40 символов");
       if(!e.target.value) {
         setNameError("Имя не может быть пустым!")
@@ -75,7 +113,8 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
     } else {
       setNameError("");
     }
-  }
+  } */
+
   function handleSubmit(e) {
     e.preventDefault();
     formValid &&
@@ -116,16 +155,16 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
               className="profile__input"
               name="name"
               type="text"
-              placeholder={currentUser.name}
+              placeholder="Введите Имя"
               required
               minLength="2"
               maxLength="40"
-              onChange={e => nameHandler(e)}
-              onBlur={e => blurHandler(e)}
+              onChange={e => checkInputNameValidity(e)}
+              // onBlur={e => blurHandler(e)}
               value={name || ""}            >
             </input>
             </label>
-            {(nameDirty && nameError) && <span className="profile__err">{nameError}</span>}
+            {nameError && <span className="profile__err">{nameError}</span>}
             {/* <span className="profile__err">{errors.name}</span> */}
             <label className="profile__label">
             E-mail
@@ -136,12 +175,12 @@ function Profile ({ onUpdateUser, logout, isLoading }) {
                 placeholder="Введите ваш Email" /* {currentUser.email} */
                 required
                 value={email || ''}
-                // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-                onChange={e => emailHandler(e)}
-                onBlur={e => blurHandler(e)}
+                // pattern= "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                onChange={e => checkInputMailValidity(e)}
+                // onBlur={e => blurHandler(e)}
               />
             </label>
-            {(emailDirty && emailError) && <span className="profile__err">{emailError}</span>}
+            {emailError && <span className="profile__err">{emailError}</span>}
             {/* <span className="profile__err">{errors.email}</span> */}
         </form>
         <button

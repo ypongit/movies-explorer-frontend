@@ -17,6 +17,9 @@ function SavedMovies ({
   setShortMovies,
   searchMovies,
   setcheckBoxState,
+  getInitialCount,
+  setVisibleMoviesCount,
+  width
 }) {
   const [queryParams, setQueryParams] = useState({});
   const value = React.useContext(AppContext);
@@ -41,6 +44,9 @@ function SavedMovies ({
         queryParams={queryParams}
         savedCheckboxVal={savedCheckboxVal}
         setcheckBoxState={setcheckBoxState}
+        getInitialCount={getInitialCount}
+        setVisibleMoviesCount={setVisibleMoviesCount}
+        width={width}
       />
       {isLoading && <Preloader />}
       {/* <SavedMoviesCardList /> */}

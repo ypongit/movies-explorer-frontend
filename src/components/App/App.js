@@ -152,18 +152,17 @@ if(localSavedMovies) {
     })
   }
 } else {
-  mainApi.getUserMovies(token)
-    .then((currentSavedMovies) => {
-      setSavedMovies(currentSavedMovies.movies)
-      localStorage.setItem(
-        'savedMoviesList',
-        JSON.stringify(currentSavedMovies.movies)
-      );
-      setLoggedIn(true);
-    })
-  .catch((err) => console.log(err));
-}
-
+    mainApi.getUserMovies(token)
+      .then((currentSavedMovies) => {
+        setSavedMovies(currentSavedMovies.movies)
+        localStorage.setItem(
+          'savedMoviesList',
+          JSON.stringify(currentSavedMovies.movies)
+        );
+        setLoggedIn(true);
+      })
+    .catch((err) => console.log(err));
+  }
   }
 }, [loggedIn]);
 
@@ -281,6 +280,37 @@ const loadMoreFilms = () => {
 const savedCheckboxVal = localStorage.getItem('filterShortMovies')==='true';
 const [checkBoxState, setcheckBoxState] = useState(savedCheckboxVal);
 
+const filterMovies = (moviesList, name) => {
+  const lastSearchList = moviesList.filter((movie) => {
+    if (checkBoxState === true){
+        return ((
+          movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
+          // movie.description.toLowerCase().includes(name.toLowerCase()) ||
+          movie.nameEN.toLowerCase().includes(name.toLowerCase())
+        ) && movie.duration <=  SHORT_MOVIES);
+      } else {
+        return (
+          movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
+          // movie.description.toLowerCase().includes(name.toLowerCase()) ||
+          movie.nameEN.toLowerCase().includes(name.toLowerCase())
+        );
+      }
+    });
+    setMovies(lastSearchList);
+    localStorage.setItem('lastSearchList', JSON.stringify(lastSearchList));
+    localStorage.setItem('filterShortMovies', checkBoxState);
+
+    lastSearchList.length === 0 &&
+    setTimeout(() => {
+        setInfoTooltipTitle({
+          icon: regFail,
+          title: 'Ничего не найдено'
+        });
+        setIsInfoTooltipOpen(true);
+      }, 1200);
+    return lastSearchList;
+}
+
 // Поиск фильмов
 const searchMovies = (name) => {
   if (!name) {
@@ -293,113 +323,68 @@ const searchMovies = (name) => {
   }
   // let localMovies = localStorage.getItem('movies');
   setMovies([]);
+  localStorage.setItem('queryText', name);
   if (loggedIn) {
-    setIsLoading(true)
-
-  moviesApi.getMovies()
-    .then((res) => {
-      setAllMovies(res);
-      localStorage.setItem('allMovies', JSON.stringify(res));
-    })
-    .then(() => {
-      const moviesList = JSON.parse(localStorage.getItem('allMovies'));
-          const lastSearchList = moviesList.filter((movie) => {
-          if (checkBoxState === true){
-            return ((
-              movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
-              // movie.description.toLowerCase().includes(name.toLowerCase()) ||
-              movie.nameEN.toLowerCase().includes(name.toLowerCase())
-            ) && movie.duration <=  SHORT_MOVIES);
-          } else {
-            return (
-              movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
-              // movie.description.toLowerCase().includes(name.toLowerCase()) ||
-              movie.nameEN.toLowerCase().includes(name.toLowerCase())
-            );
-          }
-        });
-
-        /* let copyLocalMovies = Object.assign([], JSON.parse(localMovies));
-        lastSearchList.forEach(element => {
-          let isExist = (copyLocalMovies.some((i) => i.id === element.id));
-          if (!isExist) {
-            copyLocalMovies.push(element);
-          }
-            else {
-              console.log("Элемент ", element, "уже сохранен в ", copyLocalMovies)
-            }
-            // Добавляем результат поиска в массив фильмов из локального хран.
-        }); */
-        setMovies(lastSearchList);
-        localStorage.setItem('movies', JSON.stringify(lastSearchList));
-        localStorage.setItem('lastSearchList', JSON.stringify(lastSearchList));
-        localStorage.setItem('filterShortMovies', checkBoxState);
-
-        lastSearchList.length === 0 &&
-        setTimeout(() => {
-            setInfoTooltipTitle({
-              icon: regFail,
-              title: 'Ничего не найдено'
-            });
-            setIsInfoTooltipOpen(true);
-          }, 1200);
-        return lastSearchList;
+  const allLocalMovies = JSON.parse(localStorage.getItem('allMovies'));
+  if (allLocalMovies) {
+    console.log("Достали фильмы из локального хранилища.")
+    filterMovies(allLocalMovies, name);
+  } else {
+      setIsLoading(true)
+      moviesApi.getMovies()
+      .then((res) => {
+        setAllMovies(res);
+        localStorage.setItem('allMovies', JSON.stringify(res));
+      })
+      .then(() => {
+        console.log("В локальном хранилище ничего не было, сходили на сервер.")
+        const allLocalMovies = JSON.parse(localStorage.getItem('allMovies'));
+        filterMovies(allLocalMovies, name);
+        }
+      )
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
     }
-    )
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-      setIsLoading(false);
-    })
   }
 }
-/* const getMoviesList = (name) => {
-    if (loggedIn) {
-    setIsLoading(true);
-    moviesApi.getMovies()
-    .then((res) => {
-      // console.log('res ', res);
-      setMovies(res);
-      // console.log('Поиск фильма ', movies);
-      localStorage.setItem('movies', JSON.stringify(res));
-      searchMovies(name);
-    })
-    .catch((err) => {
-      setInfoTooltipTitle({
-        icon: regFail,
-        title: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
-      });
-      setIsInfoTooltipOpen(true);
-    })
-  .finally(() => {
-    setIsLoading(false);
-  })
+const [lastSearchSavedList, setLastSearchSavedList] = useState([]);
+const searchSavedMovies = (name) => {
+  console.log({checkBoxState})
+  const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
+  if (!name) {
+    setInfoTooltipTitle({
+      icon: regFail,
+      title: 'Нужно ввести ключевое слово'
+    });
+    setIsInfoTooltipOpen(true);
+    return;
   }
-} */
-
-  const searchSavedMovies = (name) => {
-    const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
-    if (!name) {
-      setInfoTooltipTitle({
-        icon: regFail,
-        title: 'Нужно ввести ключевое слово'
-      });
-      setIsInfoTooltipOpen(true);
-      return;
-    }
-    if (savedMoviesList) {
-      const searchSavedMovie = savedMoviesList.filter((movie) => {
-        const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
+  if (savedMoviesList) {
+    setSavedMovies([]);
+    const searchSavedMovie = savedMoviesList.filter((movie) => {
+      const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
+      if (checkBoxState === true){
+        return ((
+          movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
+          // movie.description.toLowerCase().includes(name.toLowerCase()) ||
+          movie.nameEN.toLowerCase().includes(name.toLowerCase())
+        ) && movie.duration <=  SHORT_MOVIES);
+      } else {
         return (
           movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
           // movie.description.toLowerCase().includes(name.toLowerCase()) ||
-          nameEN.toLowerCase().includes(name.toLowerCase())
+          movie.nameEN.toLowerCase().includes(name.toLowerCase())
         );
-      });
-      setSavedMovies(searchSavedMovie);
-    }
+      }
+    });
+    setSavedMovies(searchSavedMovie);
+    setLastSearchSavedList(searchSavedMovie);
   }
+}
 
 // Обработчик формы регистрации
   const handleRegister = ({ name, email, password }) => {
@@ -493,9 +478,6 @@ const searchMovies = (name) => {
     history.push('/');
   }
 
-  const infoPopupClose = () => {
-    setInfoTooltipTitle(false);
-  }
 // Функция обновления данных профиля
   const handleUpdateProfile = (data) => {
     const token = localStorage.getItem('jwt');
@@ -536,7 +518,7 @@ const toggleShortSavedMovies = () => {
 }
 
 useEffect(() => {
-  const lastSearchList = JSON.parse(localStorage.getItem('movies'));
+  const lastSearchList = JSON.parse(localStorage.getItem('lastSearchList'));
   if (lastSearchList) {
     isShortMovies ? setMovies((state) => state.filter((i) => i.duration <= SHORT_MOVIES))
     : setMovies(lastSearchList);
@@ -548,8 +530,9 @@ useEffect(() => {
 useEffect(() => {
   const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
   isShortSavedMovies ? setSavedMovies((state) => state.filter((i) => i.duration <= SHORT_MOVIES))
-  : setSavedMovies(savedMoviesList);
-}, [isShortSavedMovies]);
+  // : setSavedMovies(savedMoviesList);
+  : setSavedMovies(lastSearchSavedList);
+}, [isShortSavedMovies, lastSearchSavedList]);
 
   return (
     // компонент App внедрить контекст через CurrentUserContext.Provider
@@ -587,12 +570,16 @@ useEffect(() => {
             setShortMovies={setIsShortMovies}
             useCurrentWidth={useCurrentWidth}
             getByWidth={getByWidth}
+            width={width}
             getInitialCount={getInitialCount}
+            setVisibleMoviesCount={setVisibleMoviesCount}
             loadMoreFilms={loadMoreFilms}
             visibleMoviesCount={visibleMoviesCount}
             savedCheckboxVal={savedCheckboxVal}
             setcheckBoxState={setcheckBoxState}
+            checkBoxState={checkBoxState}
             isInfoTooltipOpen={isInfoTooltipOpen}
+            InfoTooltipTitle={InfoTooltipTitle}
           />
           <ProtectedRoute
             path="/saved-movies"
@@ -605,6 +592,9 @@ useEffect(() => {
             getMovies={searchSavedMovies}
             searchMovies={searchSavedMovies}
             setcheckBoxState={setcheckBoxState}
+            getInitialCount={getInitialCount}
+            setVisibleMoviesCount={setVisibleMoviesCount}
+            width={width}
           />
           <ProtectedRoute
             path="/profile"

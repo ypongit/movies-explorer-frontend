@@ -15,7 +15,11 @@ function SearchForm({
   setShortMovies,
   queryParams,
   savedCheckboxVal,
-  setcheckBoxState
+  setcheckBoxState,
+  checkBoxState,
+  width,
+  setVisibleMoviesCount,
+  getInitialCount
 }) {
   // Стейт, в котором содержится значение инпута
   const [searchValue, setSearchValue] = React.useState('');
@@ -42,10 +46,10 @@ function SearchForm({
  }
   function handleSubmit(e) {
     e.preventDefault();
-
+    setVisibleMoviesCount(getInitialCount(width));
     /* isValid &&  */
     searchMovies(name);
-    localStorage.setItem('queryText', name);
+    // localStorage.setItem('queryText', name);
     // localStorage.setItem('filterShortMovies', checkBoxState);
 
     // resetForm();
@@ -92,6 +96,7 @@ function SearchForm({
               queryParams={queryParams}
               setIsChecked={setIsChecked}
               setcheckBoxState={setcheckBoxState}
+              checkBoxState={checkBoxState}
               savedCheckboxVal={savedCheckboxVal}
             />
         </form>

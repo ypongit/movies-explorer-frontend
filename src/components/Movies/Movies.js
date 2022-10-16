@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./Movies.css";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
@@ -21,16 +22,22 @@ function Movies({
   useCurrentWidth,
   getByWidth,
   getInitialCount,
+  setVisibleMoviesCount,
+  width,
   loadMoreFilms,
   fetchMovies,
   savedMovies,
   setcheckBoxState,
-  isInfoTooltipOpen
+  checkBoxState,
+  isInfoTooltipOpen,
+  InfoTooltipTitle
 }){
   const value = React.useContext(AppContext);
   const savedCheckboxVal = localStorage.getItem('filterShortMovies')==='true';
   const [queryParams, setQueryParams] = useState({});
-
+  useEffect(() => {
+    localStorage.setItem('filterShortMovies', checkBoxState);
+  }, [checkBoxState])
   useEffect(() => {
     setQueryParams({ queryText: localStorage.getItem('queryText') });
   }, []);
@@ -45,6 +52,7 @@ function Movies({
         profileText = "Аккаунт"
         headerLogo={logo}
       />
+
       <SearchForm
         getMovies={getMovies}
         searchMovies={searchMovies}
@@ -54,21 +62,28 @@ function Movies({
         fetchMovies={fetchMovies}
         savedCheckboxVal={savedCheckboxVal}
         setcheckBoxState={setcheckBoxState}
-      />
-      {isLoading && <Preloader />}
-      {/* {isInfoTooltipOpen && <h2>Нужно ввести ключевое слово</h2>} */}
-      <MoviesCardList
-        movies={movies}
-        visibleMoviesCount={visibleMoviesCount}
-        onMovieSave={onMovieSave}
-        checkIsSavedStatus={checkIsSavedStatus}
-        onMovieDelete={onMovieDelete}
-        useCurrentWidth={useCurrentWidth}
-        getByWidth={getByWidth}
+        checkBoxState={checkBoxState}
         getInitialCount={getInitialCount}
-        loadMoreFilms={loadMoreFilms}
-        savedMovies={savedMovies}
+        setVisibleMoviesCount={setVisibleMoviesCount}
+        width={width}
       />
+      {isInfoTooltipOpen && (<p className="movies__message">{InfoTooltipTitle.title}</p>)}
+      {isLoading ? (<Preloader />) : (
+        <MoviesCardList
+          movies={movies}
+          visibleMoviesCount={visibleMoviesCount}
+          onMovieSave={onMovieSave}
+          checkIsSavedStatus={checkIsSavedStatus}
+          onMovieDelete={onMovieDelete}
+          useCurrentWidth={useCurrentWidth}
+          getByWidth={getByWidth}
+          getInitialCount={getInitialCount}
+          loadMoreFilms={loadMoreFilms}
+          savedMovies={savedMovies}
+        />
+      )}
+
+
       <Footer />
     </>
   )

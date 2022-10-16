@@ -26,7 +26,7 @@ function MoviesCardList({
 
   useEffect(() => {
     if(movies){
-    setCountMoviesOnPage(movies.length);
+      setCountMoviesOnPage(movies.length);
   }
   })
   /* const isMovieLiked = (id) => {
@@ -50,7 +50,7 @@ function MoviesCardList({
         }
       </section>
 
-      <div className={countMoviesOnPage < 4 || visibleMoviesCount > 99 ?
+      <div className={countMoviesOnPage < 4 || visibleMoviesCount > movies.length ?
         "movies-cards__more_none" : "movies-cards__more"}>
         <button
           type="button"
@@ -62,7 +62,7 @@ function MoviesCardList({
       {savedMovies && (<Route path='/saved-movies'>
       <section className="movies-cards">
         {
-          savedMovies.slice(0, visibleMoviesCount).map(movie => (
+          savedMovies.map(movie => (
             <SavedMoviesCard
               key={movie.movieId}
               movie={movie}
