@@ -30,7 +30,8 @@ function Movies({
   setcheckBoxState,
   checkBoxState,
   isInfoTooltipOpen,
-  InfoTooltipTitle
+  InfoTooltipTitle,
+  lastSearchSavedList
 }){
   const value = React.useContext(AppContext);
   const savedCheckboxVal = localStorage.getItem('filterShortMovies')==='true';
@@ -80,6 +81,7 @@ function Movies({
           getInitialCount={getInitialCount}
           loadMoreFilms={loadMoreFilms}
           savedMovies={savedMovies}
+          lastSearchSavedList={lastSearchSavedList}
         />
       )}
 

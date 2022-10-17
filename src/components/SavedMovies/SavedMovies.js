@@ -19,13 +19,18 @@ function SavedMovies ({
   setcheckBoxState,
   getInitialCount,
   setVisibleMoviesCount,
-  width
+  width,
+  lastSearchSavedList,
+  setLastSearchSavedList
 }) {
   const [queryParams, setQueryParams] = useState({});
   const value = React.useContext(AppContext);
   const savedMovies = value.savedMovies;
   const savedCheckboxVal = false;
-  // console.log({savedMovies});
+  useEffect(() => {
+    setLastSearchSavedList(savedMovies);
+  }, [savedMovies])
+
   return(
     <>
       <MenuBurger />
@@ -53,6 +58,7 @@ function SavedMovies ({
       {/* {savedMovies && <MoviesCardList />} */}
       {savedMovies && (<MoviesCardList
         onMovieDelete={onMovieDelete}
+        lastSearchSavedList={lastSearchSavedList}
       />)}
       <Footer />
     </>

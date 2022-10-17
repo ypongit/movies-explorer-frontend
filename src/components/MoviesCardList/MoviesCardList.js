@@ -14,7 +14,8 @@ function MoviesCardList({
   onMovieDelete,
   checkIsSavedStatus,
   visibleMoviesCount,
-  loadMoreFilms
+  loadMoreFilms,
+  lastSearchSavedList
 }) {
   const value = React.useContext(AppContext);
   const movies = value.movies;
@@ -62,7 +63,7 @@ function MoviesCardList({
       {savedMovies && (<Route path='/saved-movies'>
       <section className="movies-cards">
         {
-          savedMovies.map(movie => (
+          lastSearchSavedList.map(movie => (
             <SavedMoviesCard
               key={movie.movieId}
               movie={movie}
