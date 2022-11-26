@@ -43,7 +43,7 @@ function App() {
 
   // сохраненные фильмы (наша api)
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [lastSearchSavedList, setLastSearchSavedList] = useState([]);
+  const [lastSearchSavedList, setLastSearchSavedList] = useState([]); // переменная для отрисовки найденных фильмов
   // переменные состояния
   const [isLoading, setIsLoading] = useState(false);  // Загрузка фильмов
   const [isSending, setIsSending] = useState(false);  // Сохранение фильмов
@@ -352,7 +352,7 @@ function App() {
     }
   }
 
-  const [foundMovies, setFoundMovies] = useState([]);
+  const [foundMovies, setFoundMovies] = useState([]); // фильмы найденные в сохраненных по запросу
 
   const searchSavedMovies = (name) => {
     const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
